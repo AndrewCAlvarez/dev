@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width = device-width, initial-scale = 1.0, minimum-scale = 1, maximum-scale = 1, user-scalable = no"
+        />
+        <meta name="apple-mobile-web-app-title" content="Game Board" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link rel="apple-touch-icon" href="images/gameBoardIcon.png" />
+        <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png" />
+        <link
+            rel="apple-touch-icon"
+            sizes="120x120"
+            href="touch-icon-iphone-retina.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="152x152"
+            href="touch-icon-ipad-retina.png"
+        />
+
+        <!-- <link rel="stylesheet" href="style.css" /> -->
+        <link rel="stylesheet" href="bootstrap.min.css">
+
+        <title>🎲Game Board</title>
+    </head>
+    <body>
+        <main>
+            <h1>Game Board</h1>
+            <button type="button" class="btn btn-primary" id="getBtn">GET REQUEST</button>
+            <form action="/maps" method="POST" >
+                <input type="text" name="mapImg" id="mapImg">
+                <button type="submit">POST</button>
+            </form>
+
+
+            <!-- <form id="imageForm">
+               <label for="">Upload Image</label> -->
+                <!-- <input type="file" name="image" accept="image/*" /> -->
+                <!-- <input type="file" onchange="onFileSelected(event)" />
+            </form> --> 
+
+            <div class="board--container" id="board--container">
+                <canvas id="board--canvas"></canvas>
+                <div style="display:none;"">
+                        <img src="" class="boardImg" id="boardImg" width="10px" height="auto" alt="" />
+                </div>
+                <div class="imgControls">
+                    <button type="button" class="decreaseScale">-</button>
+                    <button type="button" class="increaseScale">+</button>
+                    <button type="button" class="rotateLeft">LEFT</button>
+                    <button type="button" class="rotateRight">RIGHT</button>
+                    <button type="button" class="fullscreenBtn">
+                        Fullscreen
+                    </button>
+                    <input type="checkbox" name="toggler" id="paintToggler" />
+                    <button type="button" class="ctrlToggle">></button>
+                </div>
+            </div>
+        </main>
+        <p id="jsonText"></p>
+        <script src="app.js"></script>
+
+    </body>
+</html>

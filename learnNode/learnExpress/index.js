@@ -1,29 +1,56 @@
 const express = require("express");
+const cors = require("cors");
+const mongoose = require("mongoose");
+const fs = require("fs");
+const multer = require("multer");
+var upload = multer({ dest: "uploads/" });
+
+const port = process.env.PORT || 3000;
 const app = express();
-const port = 3000;
 
 var MongoClient = require("mongodb").MongoClient;
 var url = "mongodb://localhost:27017/";
+var root = "/Users/andrewalvarez/dev/learnNode/learnExpress";
 
-app.use(express.static("public"));
-app.use(express.static("client"));
+app.use(cors(), express.static("public"));
+app.use(express.json()); //for parsing json
+app.use(express.urlencoded({ extended: false }));
 
 app.get("/", function(req, res) {
-    res.sendFile("/public/client/index.html");
+    res.sendFile("/public/index.html", { root: root });
+});
+
+app.get("/maps", function(req, res) {
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
-        var dbo = db.db("mydb");
-        dbo.collection("customers")
+        var dbo = db.db("messages");
+        dbo.collection("posts")
             .find({})
             .toArray(function(err, result) {
                 if (err) throw err;
                 console.log(result);
+                res.send(result);
                 db.close();
             });
     });
 });
 
-app.post("/", function(res, res) {
+app.post("/maps", function(req, res, next) {
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        var message = req.body;
+        var dbo = db.db("messages");
+        var myobj = [{ msg: message }];
+        dbo.collection("posts").insertMany(myobj, function(err, res) {
+            if (err) throw err;
+            console.log(req.body);
+            console.log("Number of documents inserted: " + res.insertedCount);
+            db.close();
+        });
+    });
+});
+
+app.post("/", function(req, res) {
     res.send("Got a POST request");
     MongoClient.connect(url, function(err, db) {
         if (err) throw err;
