@@ -302,14 +302,14 @@ var isMobile = navigator.userAgent.match(
     var info;
     btn.onclick = () => {
         var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                info = JSON.parse(this.responseText);
-                console.log(JSON.stringify(info));
-                bodyTxt.innerHTML = JSON.stringify(info);
-            }
-        };
-        xhttp.open("GET", "http://localhost:3000/maps", true);
+        // xhttp.onreadystatechange = function() {
+        //     if (this.readyState == 4 && this.status == 200) {
+        //         // info = this.responseText;
+        //         // console.log(info);
+        //         // bodyTxt.innerHTML = JSON.stringify(info);
+        //     }
+        // };
+        xhttp.open("GET", "http://localhost:3000/test", true);
         xhttp.send();
     };
 }

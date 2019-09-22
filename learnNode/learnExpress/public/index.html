@@ -29,10 +29,12 @@
     <body>
         <main>
             <h1>Game Board</h1>
-            <button type="button" class="btn btn-primary" id="getBtn">GET REQUEST</button>
-            <form action="/maps" method="POST" >
-                <input type="text" name="mapImg" id="mapImg">
-                <button type="submit">POST</button>
+            <form action="/users" method="GET">
+                <button type="submit" class="btn btn-primary" id="getBtn">GET REQUEST</button>
+            </form>
+            <form action="/users" method="post" enctype="multipart/form-data" >
+                <!-- <input type="text" name="userName"> -->
+                <button type="submit" class="btn btn-primary" id="postBtn">POST REQUEST</button>
             </form>
 
 

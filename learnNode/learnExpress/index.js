@@ -1,90 +1,63 @@
 const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
 const fs = require("fs");
+const monk = require("monk");
+const cors = require("cors");
 const multer = require("multer");
-var upload = multer({ dest: "uploads/" });
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+var Schema = mongoose.Schema;
+
+exports.models = require("./models/index");
 
 const port = process.env.PORT || 3000;
 const app = express();
+mongoose.connect("mongodb://localhost/27017");
 
-var MongoClient = require("mongodb").MongoClient;
-var url = "mongodb://localhost:27017/";
 var root = "/Users/andrewalvarez/dev/learnNode/learnExpress";
 
 app.use(cors(), express.static("public"));
 app.use(express.json()); //for parsing json
 app.use(express.urlencoded({ extended: false }));
 
+// app.get("/users", function(req, res) {
+//     var db = mongoose.connection;
+//     db.on("error", console.error.bind(console, "connection error:"));
+//     db.once("open", function() {
+//         // we're connected!
+//     });
+
+//     mongoose.model("users").find(function(err, users) {
+//         res.send(users);
+//     });
+// });
+
+app.get("/kittens", function(req, res) {
+    var db = mongoose.connection;
+    db.on("error", console.err.bind(console, "connection error:"));
+});
+
+app.get("/users", function(req, res) {
+    var db = mongoose.connection;
+    db.on("error", console.error.bind(console, "connection error:"));
+    console.log("Before db.once");
+    db.once("open", function() {
+        //connected
+        console.log("Connection succesful!");
+        var user1 = new User({
+            name: "Harry"
+        });
+
+        user1.save(function(err, user) {
+            if (err) return console.error(err);
+            console.log(user.name + " saved to the users collection.");
+        });
+    });
+    console.log("done");
+    res.send("GET REQUEST");
+});
+
 app.get("/", function(req, res) {
     res.sendFile("/public/index.html", { root: root });
 });
 
-app.get("/maps", function(req, res) {
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("messages");
-        dbo.collection("posts")
-            .find({})
-            .toArray(function(err, result) {
-                if (err) throw err;
-                console.log(result);
-                res.send(result);
-                db.close();
-            });
-    });
-});
-
-app.post("/maps", function(req, res, next) {
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var message = req.body;
-        var dbo = db.db("messages");
-        var myobj = [{ msg: message }];
-        dbo.collection("posts").insertMany(myobj, function(err, res) {
-            if (err) throw err;
-            console.log(req.body);
-            console.log("Number of documents inserted: " + res.insertedCount);
-            db.close();
-        });
-    });
-});
-
-app.post("/", function(req, res) {
-    res.send("Got a POST request");
-    MongoClient.connect(url, function(err, db) {
-        if (err) throw err;
-        var dbo = db.db("mydb");
-        var myobj = [
-            { name: "John", address: "Highway 71" },
-            { name: "Peter", address: "Lowstreet 4" },
-            { name: "Amy", address: "Apple st 652" },
-            { name: "Hannah", address: "Mountain 21" },
-            { name: "Michael", address: "Valley 345" },
-            { name: "Sandy", address: "Ocean blvd 2" },
-            { name: "Betty", address: "Green Grass 1" },
-            { name: "Richard", address: "Sky st 331" },
-            { name: "Susan", address: "One way 98" },
-            { name: "Vicky", address: "Yellow Garden 2" },
-            { name: "Ben", address: "Park Lane 38" },
-            { name: "William", address: "Central st 954" },
-            { name: "Chuck", address: "Main Road 989" },
-            { name: "Viola", address: "Sideway 1633" }
-        ];
-        dbo.collection("customers").insertMany(myobj, function(err, res) {
-            if (err) throw err;
-            console.log("Number of documents inserted: " + res.insertedCount);
-            db.close();
-        });
-    });
-});
-
-app.put("/user", function(res, res) {
-    res.send("Got a PUT request at /user");
-});
-
-app.delete("/user", function(req, res) {
-    res.send("Got a DELETE request at /user");
-});
-
-app.listen(port, () => console.log("Example app listening on port ${port}!"));
+app.listen(port, () => console.log("Example app listening on port 3000!"));
