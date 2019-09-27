@@ -300,29 +300,28 @@ var isMobile = navigator.userAgent.match(
     var btn = document.querySelector("#getBtn");
     var bodyTxt = document.querySelector("#jsonText");
     var info;
-    btn.onclick = () => {
+    btn.onclick = e => {
+        e.preventDefault();
         var xhttp = new XMLHttpRequest();
-        // xhttp.onreadystatechange = function() {
-        //     if (this.readyState == 4 && this.status == 200) {
-        //         // info = this.responseText;
-        //         // console.log(info);
-        //         // bodyTxt.innerHTML = JSON.stringify(info);
-        //     }
-        // };
-        xhttp.open("GET", "http://localhost:3000/test", true);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                info = this.responseText;
+                console.log(info);
+                bodyTxt.innerHTML = JSON.stringify(info);
+            }
+        };
+        xhttp.open("GET", "http://localhost:3000/users", true);
         xhttp.send();
     };
 }
 {
+    // let postForm = document.querySelector("#postForm");
+    // var formData = new FormData(postForm);
     // var postBtn = document.querySelector("#postBtn");
-    // postBtn.onclick = () => {
+    // postBtn.onclick = e => {
+    //     e.preventDefault();
     //     var xhttp = new XMLHttpRequest();
-    //     xhttp.onreadystatechange = function() {
-    //         if (this.readyState == 4 && this.status == 200) {
-    //             //do something
-    //         }
-    //     };
-    //     xhttp.open("POST", "http://localhost:3000/maps", true);
-    //     xhttp.send("msg=FIRST POST");
+    //     xhttp.open("POST", "http://localhost:3000/users", true);
+    //     xhttp.send("This is a test post.");
     // };
 }

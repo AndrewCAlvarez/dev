@@ -3,57 +3,65 @@ const fs = require("fs");
 const monk = require("monk");
 const cors = require("cors");
 const multer = require("multer");
-const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-var Schema = mongoose.Schema;
+const MongoClient = require("mongodb").MongoClient;
+const assert = require("assert");
 
 exports.models = require("./models/index");
 
 const port = process.env.PORT || 3000;
 const app = express();
-mongoose.connect("mongodb://localhost/27017");
+const url = "mongodb://localhost/27017";
 
 var root = "/Users/andrewalvarez/dev/learnNode/learnExpress";
 
 app.use(cors(), express.static("public"));
 app.use(express.json()); //for parsing json
 app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
+//////////////////////////////////////////////////////
+///This is for uploading images with Multer//////////
+////////////////////////////////////////////////////
 
-// app.get("/users", function(req, res) {
-//     var db = mongoose.connection;
-//     db.on("error", console.error.bind(console, "connection error:"));
-//     db.once("open", function() {
-//         // we're connected!
-//     });
-
-//     mongoose.model("users").find(function(err, users) {
-//         res.send(users);
-//     });
-// });
-
-app.get("/kittens", function(req, res) {
-    var db = mongoose.connection;
-    db.on("error", console.err.bind(console, "connection error:"));
+///////////////////////////////////////////////////
+app.post("/users", function(req, res) {
+    MongoClient.connect(
+        url,
+        { useNewUrlParser: true, useUnifiedTopology: true },
+        function(err, client) {
+            const db = client.db("users");
+            console.log(req.body);
+            db.collection("users").insertOne({ name: req.body });
+            client.close();
+        }
+    );
 });
 
 app.get("/users", function(req, res) {
-    var db = mongoose.connection;
-    db.on("error", console.error.bind(console, "connection error:"));
-    console.log("Before db.once");
-    db.once("open", function() {
-        //connected
-        console.log("Connection succesful!");
-        var user1 = new User({
-            name: "Harry"
-        });
-
-        user1.save(function(err, user) {
-            if (err) return console.error(err);
-            console.log(user.name + " saved to the users collection.");
-        });
-    });
-    console.log("done");
-    res.send("GET REQUEST");
+    MongoClient.connect(
+        url,
+        { useNewUrlParser: true, useUnifiedTopology: true },
+        function(err, client) {
+            const db = client.db("users");
+            var cursor = db.collection("users").find({});
+            myObjArr = [];
+            var myObj = {};
+            function iterateFunc(doc) {
+                // console.log(JSON.stringify(doc.name, null, 4));
+                myObjArr.push(doc.name.userName);
+                console.log("array in function: " + myObjArr);
+            }
+            function errorFunc(error) {
+                console.log(error);
+            }
+            cursor.forEach(iterateFunc, errorFunc);
+            setTimeout(function() {
+                console.log("\n\narray after function: " + myObjArr + "\n\n");
+                res.send(myObjArr);
+            }, 1000);
+            client.close();
+        }
+    );
 });
 
 app.get("/", function(req, res) {
