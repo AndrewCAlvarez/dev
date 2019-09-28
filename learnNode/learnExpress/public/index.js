@@ -45,7 +45,27 @@ app.post("/upload", upload.single("avatar"), function(req, res, next) {
 ////////////////////////////////////////////////
 
 app.get("/boardImage", function(req, res) {
-    res.send("uploads/ce9a69c231808a617b6ce089f831b33f");
+    MongoClient.connect(
+        url,
+        { useNewUrlParser: true, useUnifiedTopology: true },
+        function(err, client) {
+            const db = client.db("boardImage");
+            var cursor = db.collection("users").find({ imageName: "default" });
+            myObjArr = [];
+            function iterateFunc(doc) {
+                console.log(doc.image.path);
+                myObjArr.push(doc.image.path);
+            }
+            function errorFunc(error) {
+                console.log(error);
+            }
+            cursor.forEach(iterateFunc, errorFunc);
+            setTimeout(function() {
+                res.send(myObjArr[0]);
+            }, 1000);
+            client.close();
+        }
+    );
 });
 
 app.post("/boardImage", function(req, res) {
@@ -55,7 +75,7 @@ app.post("/boardImage", function(req, res) {
         function(err, client) {
             const db = client.db("boardImage");
             console.log(req.body);
-            db.collection("boardImage").replaceOne({ name: req.body });
+            db.collection("users").replaceOne({ imageName: "Default" });
             client.close();
         }
     );
@@ -91,12 +111,4 @@ app.get("/", function(req, res) {
     res.sendFile("index.html", { root: root });
 });
 
-app.get("/css/style.css", function(req, res) {
-    res.sendFile("css/style.css", { root: root });
-});
-
-app.get("/app.js", function(req, res) {
-    res.sendFile("app.js", { root: root });
-});
-
-app.listen(port, () => console.log("Example app listening on port 3000!"));
+app.listen(port, () => console.log("Game Night app listening on port 3000!"));

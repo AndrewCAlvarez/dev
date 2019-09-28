@@ -57,6 +57,22 @@ main form {
   width: 50%;
 }
 
+main canvas {
+  margin-top: 5px;
+  border: 4px solid #6ad3a2;
+  border-radius: 5px;
+  background-color: white;
+}
+
+main canvas[resize] {
+  width: 100%;
+  height: 100%;
+}
+
+main .boardImg {
+  width: 100%;
+}
+
 main .board--container {
   background-color: black;
   width: 85%;
