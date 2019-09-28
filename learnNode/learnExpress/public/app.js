@@ -179,8 +179,6 @@ var isMobile = navigator.userAgent.match(
     const mainBoard = document.querySelector(".board--container");
     const board = document.querySelector(".board--container-image");
     var boardImg = document.querySelector(".boardImg");
-    var canvas = document.querySelector("#board--canvas");
-    ctx = canvas.getContext("2d");
 
     var paintArr = [];
     var paintHistory = [];
@@ -300,20 +298,46 @@ var isMobile = navigator.userAgent.match(
     var btn = document.querySelector("#getBtn");
     var bodyTxt = document.querySelector("#jsonText");
     var info;
+    var boardImg = document.querySelector("#boardImg");
     btn.onclick = e => {
         e.preventDefault();
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 info = this.responseText;
-                console.log(info);
-                bodyTxt.innerHTML = JSON.stringify(info);
+
+                console.log("path: " + info);
+                bodyTxt.innerHTML = info;
+                boardImg.src = info;
+                console.log(boardImg.src);
             }
         };
         xhttp.open("GET", "http://localhost:3000/users", true);
         xhttp.send();
     };
+
+    //load current image from server
+    window.onload = () => {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                boardImg.src = this.responseText;
+                console.log(
+                    "ReadyState: " +
+                        this.readyState +
+                        "\nStatus: " +
+                        this.status
+                );
+            }
+
+            bodyTxt.innerHTML =
+                "ReadyState: " + this.readyState + "\nStatus: " + this.status;
+        };
+        xhttp.open("GET", "http://localhost:3000/boardImage", true);
+        xhttp.send();
+    };
 }
+
 {
     // let postForm = document.querySelector("#postForm");
     // var formData = new FormData(postForm);

@@ -21,47 +21,53 @@
             href="touch-icon-ipad-retina.png"
         />
 
-        <!-- <link rel="stylesheet" href="style.css" /> -->
-        <link rel="stylesheet" href="bootstrap.min.css">
+        <link href="css/style.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
 
-        <title>🎲Game Board</title>
+        <title>🎲Game Night</title>
     </head>
     <body>
         <main>
-            <h1>Game Board</h1>
+            <h1>Game Night</h1>
             <form action="/users" method="GET">
-                <button type="submit" class="btn btn-primary" id="getBtn">GET REQUEST</button>
+                <input
+                    type="text"
+                    name="imageName"
+                    placeholder="name of file"
+                />
+                <button type="submit" class="btn btn-primary" id="getBtn">
+                    GET IMAGE
+                </button>
             </form>
-            <form action="/users" method="post" id="postForm" >
-                <input type="text" name="userName">
-                <button type="submit" class="btn btn-primary" id="postBtn">POST REQUEST</button>
-            </form>
+            <!-- File upload Form -->
             <form method="post" enctype="multipart/form-data" action="/upload">
-                <input type="file" name="file" >
-                <input type="submit" value="Submit" class="btn btn-primary">
+                <input type="text" name="imageName" placeholder="name" />
+                <input type="file" name="avatar" />
+                <input type="submit" value="Submit" class="btn btn-primary" />
             </form>
 
+            <img
+                src=""
+                class="boardImg"
+                id="boardImg"
+                width="200px"
+                height="auto"
+                alt=""
+            />
 
-            <div class="board--container" id="board--container">
-                <canvas id="board--canvas"></canvas>
-                <div style="display:none;"">
-                        <img src="" class="boardImg" id="boardImg" width="10px" height="auto" alt="" />
-                </div>
-                <div class="imgControls">
-                    <button type="button" class="decreaseScale">-</button>
-                    <button type="button" class="increaseScale">+</button>
-                    <button type="button" class="rotateLeft">LEFT</button>
-                    <button type="button" class="rotateRight">RIGHT</button>
-                    <button type="button" class="fullscreenBtn">
-                        Fullscreen
-                    </button>
-                    <input type="checkbox" name="toggler" id="paintToggler" />
-                    <button type="button" class="ctrlToggle">></button>
-                </div>
+            <div class="imgControls">
+                <button type="button" class="decreaseScale">-</button>
+                <button type="button" class="increaseScale">+</button>
+                <button type="button" class="rotateLeft">LEFT</button>
+                <button type="button" class="rotateRight">RIGHT</button>
+                <button type="button" class="fullscreenBtn">
+                    Fullscreen
+                </button>
+                <input type="checkbox" name="toggler" id="paintToggler" />
+                <button type="button" class="ctrlToggle">></button>
             </div>
         </main>
         <p id="jsonText"></p>
         <script src="app.js"></script>
-
     </body>
 </html>
