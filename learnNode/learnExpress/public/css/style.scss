@@ -27,6 +27,47 @@ header {
     }
 }
 
+.modalContainer {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    background-color: rgba(0, 0, 0, 0.377);
+
+    .fileModal {
+        h2 {
+            text-align: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.301);
+            color: white;
+            background-color: rgb(36, 36, 36);
+        }
+        width: 75%;
+        height: 75%;
+        border: 4px solid #c0ff7b;
+        border-radius: 5px;
+        margin: 0 auto;
+        background-color: white;
+
+        #modalImageGallery {
+            padding: 10px;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-evenly;
+
+            img {
+                max-width: 100px;
+            }
+        }
+    }
+}
+
 main {
     height: 70vh;
     display: flex;
@@ -41,16 +82,14 @@ main {
 
     canvas {
         margin-top: 5px;
-
         border: 4px solid rgb(106, 211, 162);
-        border-radius: 5px;
         background-color: white;
     }
 
     canvas[resize] {
         //automatically resizes the canvas
-        width: 100%;
-        height: 100%;
+        width: 100vw;
+        height: 100vh;
     }
 
     .boardImg {
@@ -59,45 +98,38 @@ main {
         // clip: rect(0px, 60px, 200px, 0px);
     }
 
-    .board--container {
-        background-color: black;
-        width: 85%;
-        height: 40vh;
-        border: 3px solid black;
-        border-radius: 5px;
-        overflow: scroll;
-        margin: 0 auto;
+    .imgControls {
+        user-select: none;
+        position: fixed;
+        top: 90vh;
+        left: 0;
 
-        .imgControls {
-            user-select: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 999999999;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        font-size: 2rem;
+
+        max-width: 90%;
+        #paintToggler {
+            padding: 0 5vh;
+        }
+
+        button,
+        input {
+            outline: none;
+            width: 10vh;
+            height: 10vh;
+            border-radius: 0;
+        }
+
+        a {
             color: white;
-            display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            font-size: 2rem;
-            border-radius: 0 0 10px 0;
-            background-color: rgba(0, 0, 0, 0.479);
-            max-width: 90%;
-            #paintToggler {
-                padding: 0 5vh;
-            }
+            text-decoration: none;
+            outline: none;
+        }
 
-            button,
-            input {
-                outline: none;
-                width: 10vh;
-                height: 10vh;
-                background-color: #fff;
-            }
-
-            .ctrlToggle {
-                border-radius: 0 0 10px 0;
-                background-color: #fff;
-            }
+        .ctrlToggle {
+            border-radius: 0 10px 0 0;
         }
     }
 

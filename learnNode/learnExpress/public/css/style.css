@@ -36,6 +36,61 @@ header form button {
   color: white;
 }
 
+.modalContainer {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  background-color: rgba(0, 0, 0, 0.377);
+}
+
+.modalContainer .fileModal {
+  width: 75%;
+  height: 75%;
+  border: 4px solid #c0ff7b;
+  border-radius: 5px;
+  margin: 0 auto;
+  background-color: white;
+}
+
+.modalContainer .fileModal h2 {
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.301);
+  color: white;
+  background-color: #242424;
+}
+
+.modalContainer .fileModal #modalImageGallery {
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.modalContainer .fileModal #modalImageGallery img {
+  max-width: 100px;
+}
+
 main {
   height: 70vh;
   display: -webkit-box;
@@ -60,39 +115,26 @@ main form {
 main canvas {
   margin-top: 5px;
   border: 4px solid #6ad3a2;
-  border-radius: 5px;
   background-color: white;
 }
 
 main canvas[resize] {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 }
 
 main .boardImg {
   width: 100%;
 }
 
-main .board--container {
-  background-color: black;
-  width: 85%;
-  height: 40vh;
-  border: 3px solid black;
-  border-radius: 5px;
-  overflow: scroll;
-  margin: 0 auto;
-}
-
-main .board--container .imgControls {
+main .imgControls {
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
   position: fixed;
-  top: 0;
+  top: 90vh;
   left: 0;
-  z-index: 999999999;
-  color: white;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -104,26 +146,29 @@ main .board--container .imgControls {
       -ms-flex-pack: start;
           justify-content: flex-start;
   font-size: 2rem;
-  border-radius: 0 0 10px 0;
-  background-color: rgba(0, 0, 0, 0.479);
   max-width: 90%;
 }
 
-main .board--container .imgControls #paintToggler {
+main .imgControls #paintToggler {
   padding: 0 5vh;
 }
 
-main .board--container .imgControls button,
-main .board--container .imgControls input {
+main .imgControls button,
+main .imgControls input {
   outline: none;
   width: 10vh;
   height: 10vh;
-  background-color: #fff;
+  border-radius: 0;
 }
 
-main .board--container .imgControls .ctrlToggle {
-  border-radius: 0 0 10px 0;
-  background-color: #fff;
+main .imgControls a {
+  color: white;
+  text-decoration: none;
+  outline: none;
+}
+
+main .imgControls .ctrlToggle {
+  border-radius: 0 10px 0 0;
 }
 
 main h1 {

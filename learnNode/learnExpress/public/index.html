@@ -8,6 +8,7 @@
         />
         <meta name="apple-mobile-web-app-title" content="Game Board" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
+
         <link rel="apple-touch-icon" href="images/gameBoardIcon.png" />
         <link rel="apple-touch-icon" sizes="76x76" href="touch-icon-ipad.png" />
         <link
@@ -27,18 +28,29 @@
         <title>🎲Game Night</title>
     </head>
     <body>
+        <div class="modalContainer">
+            <div class="fileModal">
+                <h2>Your Saved Images</h2>
+                <p id="jsonText"></p>
+                <div id="modalImageGallery"></div>
+            </div>
+        </div>
         <main>
             <h1>Game Night</h1>
             <form action="/users" method="GET">
                 <button type="submit" class="btn btn-primary" id="getBtn">
-                    SAVED IMAGES
+                    SELECT IMAGE
                 </button>
             </form>
             <!-- File upload Form -->
             <form method="post" enctype="multipart/form-data" action="/upload">
                 <input type="text" name="imageName" placeholder="name" />
                 <input type="file" name="avatar" />
-                <input type="submit" value="Submit" class="btn btn-primary" />
+                <input
+                    type="submit"
+                    value="UPLOAD IMAGE"
+                    class="btn btn-primary"
+                />
             </form>
 
             <canvas id="myCanvas" resize="true"></canvas>
@@ -54,18 +66,25 @@
             />
 
             <div class="imgControls">
-                <button type="button" class="decreaseScale">-</button>
-                <button type="button" class="increaseScale">+</button>
-                <button type="button" class="rotateLeft">LEFT</button>
-                <button type="button" class="rotateRight">RIGHT</button>
-                <button type="button" class="fullscreenBtn">
-                    Fullscreen
+                <button type="button" class="decreaseScale btn btn-info">
+                    -
+                </button>
+                <button type="button" class="increaseScale btn btn-info">
+                    +
+                </button>
+                <button type="button" class="rotateLeft btn btn-info">
+                    LEFT
+                </button>
+                <button type="button" class="rotateRight btn btn-info">
+                    RIGHT
+                </button>
+                <button type="button" class="fullscreenBtn btn btn-info">
+                    FS
                 </button>
                 <input type="checkbox" name="toggler" id="paintToggler" />
-                <button type="button" class="ctrlToggle">></button>
+                <button type="button" class="ctrlToggle btn btn-info">></button>
             </div>
         </main>
-        <p id="jsonText"></p>
         <script src="js/app.js"></script>
         <script
             type="text/paperscript"

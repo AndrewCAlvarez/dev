@@ -68,6 +68,31 @@ app.get("/boardImage", function(req, res) {
     );
 });
 
+app.get("/boardImage/all", function(req, res) {
+    MongoClient.connect(
+        url,
+        { useNewUrlParser: true, useUnifiedTopology: true },
+        function(err, client) {
+            const db = client.db("boardImage");
+            var cursor = db.collection("users").find();
+            myObjArr = [];
+            function iterateFunc(doc) {
+                console.log(doc.image.path);
+                myObjArr.push(doc.image.path);
+            }
+            function errorFunc(error) {
+                console.log(error);
+            }
+            cursor.forEach(iterateFunc, errorFunc);
+            setTimeout(function() {
+                console.log(myObjArr[0]);
+                res.send(myObjArr);
+            }, 1000);
+            client.close();
+        }
+    );
+});
+
 app.post("/boardImage", function(req, res) {
     MongoClient.connect(
         url,

@@ -3,57 +3,13 @@ var isMobile = navigator.userAgent.match(
 );
 
 {
-    const board = document.querySelector(".board--container");
-
-    // for (i = 0; i < 100; i++) {
-    //     var square = document.createElement("div");
-    //     var dimension = screen.height / 10 + "px";
-    //     square.id = "square" + i;
-    //     square.style.border = "1px solid white";
-    //     square.style.width = "1in";
-    //     square.style.height = "1in";
-    //     board.appendChild(square);
-    // }
-
+    //"Fullscreen" is achieved by making the canvas the size of the screen
+    // then moving the canvas into view.
+    var canvas = document.querySelector("#myCanvas");
     var fullscreenBtn = document.querySelector(".fullscreenBtn");
     var fullscreenOpen = false;
-
     fullscreenBtn.onclick = () => {
-        if (fullscreenOpen) {
-            fullscreenOpen = false;
-            closeFullscreen();
-            function closeFullscreen() {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.mozCancelFullScreen) {
-                    /* Firefox */
-                    document.mozCancelFullScreen();
-                } else if (document.webkitExitFullscreen) {
-                    /* Chrome, Safari and Opera */
-                    document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) {
-                    /* IE/Edge */
-                    document.msExitFullscreen();
-                }
-            }
-        } else {
-            fullscreenOpen = true;
-            openFullscreen(board);
-            function openFullscreen(elem) {
-                if (elem.requestFullscreen) {
-                    elem.requestFullscreen();
-                } else if (elem.mozRequestFullScreen) {
-                    /* Firefox */
-                    elem.mozRequestFullScreen();
-                } else if (elem.webkitRequestFullscreen) {
-                    /* Chrome, Safari and Opera */
-                    elem.webkitRequestFullscreen();
-                } else if (elem.msRequestFullscreen) {
-                    /* IE/Edge */
-                    elem.msRequestFullscreen();
-                }
-            }
-        }
+        canvas.scrollIntoView();
     };
 }
 
@@ -237,7 +193,7 @@ var isMobile = navigator.userAgent.match(
     var incBtn = document.querySelector(".increaseScale");
     var rotLBtn = document.querySelector(".rotateLeft");
     var rotRBtn = document.querySelector(".rotateRight");
-    // var paintBtn = document.querySelector("#paintToggler");
+    var paintBtn = document.querySelector("#paintToggler");
     var fullScreenBtn = document.querySelector(".fullscreenBtn");
     var ctrlToggle = document.querySelector(".ctrlToggle");
 
@@ -251,8 +207,6 @@ var isMobile = navigator.userAgent.match(
             rotRBtn.style.display = "none";
             paintBtn.style.display = "none";
             fullScreenBtn.style.display = "none";
-            ctrlToggle.style.width = "5vh";
-            ctrlToggle.style.height = "5vh";
             controlsShown = false;
         } else {
             decBtn.style.display = "";
@@ -269,25 +223,49 @@ var isMobile = navigator.userAgent.match(
 }
 
 {
-    //learning AJAX
+    //////////////////////////////////////////////////////
+    ///////This opens up all images in the boardImage////
+    ////// collection and displays in modal.        ////
+    ///////////////////////////////////////////////////
     var btn = document.querySelector("#getBtn");
     var bodyTxt = document.querySelector("#jsonText");
+    var modal = document.querySelector(".fileModal");
+    var modalContainer = document.querySelector(".modalContainer");
+    var modalImageGallery = document.querySelector("#modalImageGallery");
     var info;
     var boardImg = document.querySelector("#boardImg");
+
+    modalContainer.onclick = e => {
+        if (e.target != modal) modalContainer.style.display = "none";
+    };
+
     btn.onclick = e => {
+        //reveal files in a modal
+        modalContainer.style.display = "flex";
         e.preventDefault();
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                info = this.responseText;
-
-                console.log("path: " + info);
-                bodyTxt.innerHTML = info;
-                boardImg.src = info;
-                console.log(boardImg.src);
+                while (modalImageGallery.firstChild) {
+                    //wipes the gallery to avoid duplication
+                    modalImageGallery.removeChild(modalImageGallery.firstChild);
+                }
+                info = this.responseText.split(",");
+                info.forEach(function(element) {
+                    element = element
+                        .replace("[", "")
+                        .replace("]", "")
+                        .replace('"', "")
+                        .replace('"', "");
+                    var button = document.createElement("button");
+                    var img = document.createElement("img");
+                    img.src = element;
+                    button.appendChild(img);
+                    modalImageGallery.appendChild(button);
+                });
             }
         };
-        xhttp.open("GET", "http://localhost:3000/boardImage", true);
+        xhttp.open("GET", "http://localhost:3000/boardImage/all", true);
         xhttp.send();
     };
 
@@ -309,16 +287,4 @@ var isMobile = navigator.userAgent.match(
         xhttp.open("GET", "http://localhost:3000/boardImage", true);
         xhttp.send();
     };
-}
-
-{
-    // let postForm = document.querySelector("#postForm");
-    // var formData = new FormData(postForm);
-    // var postBtn = document.querySelector("#postBtn");
-    // postBtn.onclick = e => {
-    //     e.preventDefault();
-    //     var xhttp = new XMLHttpRequest();
-    //     xhttp.open("POST", "http://localhost:3000/users", true);
-    //     xhttp.send("This is a test post.");
-    // };
 }

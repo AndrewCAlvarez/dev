@@ -1,19 +1,12 @@
-function setRaster() {
-    var str = "boardImg";
-    setTimeout(function() {
-        console.log("Timeout");
-    }, 1000);
-    return str;
-}
-console.log(setRaster());
-// Create a raster item using the image tag with id='mona'
-raster = new Raster(setRaster());
+setTimeout(function() {
+    raster = new Raster("boardImg");
 
-raster.scale(0.5);
+    raster.scale(0.5);
 
-// Move the raster to the center of the view
-raster.position = view.center;
-raster.sendToBack();
+    // Move the raster to the center of the view
+    raster.position = view.center;
+    raster.sendToBack();
+}, 1000);
 
 function onMouseDown(event) {
     raster.scale(0.1);
