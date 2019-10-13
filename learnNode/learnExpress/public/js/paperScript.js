@@ -1,4 +1,5 @@
 setTimeout(function() {
+    console.log("raster");
     raster = new Raster("boardImg");
 
     raster.scale(0.5);
@@ -31,3 +32,4 @@ function onMouseDrag(event) {
     var paintToggled = document.querySelector("#paintToggler").checked;
     if (paintToggled) myPath.add(event.point);
 }
+console.log("End of paperjs");

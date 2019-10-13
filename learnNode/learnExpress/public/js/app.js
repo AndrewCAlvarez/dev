@@ -270,21 +270,23 @@ var isMobile = navigator.userAgent.match(
     };
 
     //load current image from server
-    window.onload = () => {
-        console.log("onload");
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                boardImg.src = this.responseText;
-                console.log(
-                    "ReadyState: " +
-                        this.readyState +
-                        "\nStatus: " +
-                        this.status
-                );
-            }
-        };
-        xhttp.open("GET", "http://localhost:3000/boardImage", true);
-        xhttp.send();
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log("xml request");
+            boardImg.src = this.responseText;
+            console.log(
+                "ReadyState: " + this.readyState + "\nStatus: " + this.status
+            );
+        } else {
+            console.log(
+                "ReadyState: " + this.readyState + "\nStatus: " + this.status
+            );
+            bodyTxt.innerHTML = this.readyState + " FUCK " + this.status;
+        }
     };
+    xhttp.open("GET", "http://localhost:3000/boardImage", true);
+    xhttp.send();
 }
+console.log("End of app.js file.");

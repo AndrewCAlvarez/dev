@@ -6,6 +6,7 @@ const multer = require("multer");
 const bodyParser = require("body-parser");
 const MongoClient = require("mongodb").MongoClient;
 const assert = require("assert");
+const request = require("request");
 
 var upload = multer({ dest: "uploads/" });
 
@@ -15,6 +16,7 @@ const port = process.env.PORT || 3000;
 const app = express();
 const url = "mongodb://localhost/27017";
 
+app.use(cors());
 app.use(express.json()); //for parsing json
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -54,6 +56,7 @@ app.get("/boardImage", function(req, res) {
             myObjArr = [];
             function iterateFunc(doc) {
                 console.log(doc.image.path);
+                console.log("Loaded");
                 myObjArr.push(doc.image.path);
             }
             function errorFunc(error) {
@@ -66,6 +69,7 @@ app.get("/boardImage", function(req, res) {
             client.close();
         }
     );
+    // res.send("uploads/76f6f98d1d932dffb2afa87b5c98cf25");
 });
 
 app.get("/boardImage/all", function(req, res) {
