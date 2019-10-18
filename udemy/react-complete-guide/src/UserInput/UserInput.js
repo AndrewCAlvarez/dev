@@ -1,12 +1,21 @@
 import React from "react";
 
-import "./UserInput.css";
-
 const userInput = (props) => {
     // UserInput should hold an input element
+
+    const style = {
+        border: "1px solid black"
+    };
+
     return (
         //stuff goes here
-        <input className="UserInput" placeholder="User Input" />
+        <input
+            type="text"
+            className="UserInput"
+            placeholder={props.username}
+            onChange={props.changed}
+            style={style}
+        />
     );
 };
 
