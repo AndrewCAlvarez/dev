@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import Person from "./Person/Person";
-
-import "./App.css";
+import styles from "./App.module.css";
+import Person from "./components/Person/Person";
 
 class App extends Component {
     state = {
@@ -45,11 +44,16 @@ class App extends Component {
 
     render() {
         const style = {
-            backgroundColor: "white",
+            backgroundColor: "dodgerblue",
+            color: "white",
             font: "inherit",
-            border: "1px solid dodgerblue",
+            border: "none",
             padding: "8px",
-            cursor: "pointer"
+            cursor: "pointer",
+            outline: "none",
+            ":hover": {
+                backgroundColor: "lightblue"
+            }
         };
 
         let persons = null;
@@ -70,24 +74,32 @@ class App extends Component {
                     })}
                 </div>
             );
+
+            style.backgroundColor = "red";
+            style[":hover"] = {
+                backgroundColor: "salmon"
+            };
+        }
+
+        const assignedClasses = [];
+
+        if (this.state.persons.length <= 2) {
+            assignedClasses.push(styles.red); //assignedClasses = ['red']
+        }
+        if (this.state.persons.length <= 1) {
+            assignedClasses.push(styles.bold); // assignedClasses = ['red', 'bold']
         }
 
         return (
-            <div className="App">
-                <h1>This is me again.</h1>
-                <p>This is paragraph text.</p>
+            <div className={styles.App}>
+                <h1>Hi, I'm a React App</h1>
+                <p className={assignedClasses.join(" ")}>Zuckerberg loves you!</p>
                 <button style={style} onClick={this.togglePersonsHandler}>
                     Toggle Persons
                 </button>
                 {persons}
             </div>
         );
-        //This is basically what render does
-        // return React.createElement(
-        //     "div",
-        //     null,
-        //     React.createElement("h1", { className: "App" }, "Do it.")
-        // );
     }
 }
 
