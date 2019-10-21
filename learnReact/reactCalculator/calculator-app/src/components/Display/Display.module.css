@@ -1,0 +1,9 @@
+.Display {
+  height: 10vh;
+  background-color: dodgerblue;
+  color: white;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-content: center;
+}

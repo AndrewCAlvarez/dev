@@ -1,0 +1,12 @@
+.Button {
+  width: 30%;
+  height: 5vh;
+  background-color: blanchedalmond;
+  border: 1px dodgerblue;
+  margin: 1px;
+  outline: none;
+}
+
+.Button:hover {
+  background-color: rgb(123, 181, 240);
+}
