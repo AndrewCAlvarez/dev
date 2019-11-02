@@ -1,33 +1,28 @@
 function App() {
   let parentElem = document.querySelector("#main");
-  let img =
-    "https://vignette.wikia.nocookie.net/disney/images/8/80/Profile_-_Darth_Vader.png/revision/latest?cb=20190314100842";
-  name = "Darth Vader";
-  bio = "Chill dude looking to rule the galaxy with my son.";
-  cardCreationForm(parentElem, "Image");
-  cardCreationForm(parentElem, "Name");
-  cardCreationForm(parentElem, "Bio");
-  createProfile(parentElem, img, name, bio);
+
+  createForm(parentElem, "image", "name", "bio");
+  // createProfile(parentElem, img, name, bio);
 }
 
-function createProfile(parentElem, img, name, bio) {
+function createProfile(parentElem) {
   // Create a card element with an image, name, and small bio
   let card = document.createElement("div");
   card.classList.add("card");
 
   let image = document.createElement("img");
-  image.src = img;
+  image.src = document.querySelector("#imageInput").value;
   image.classList.add("card-img-top");
 
   let cardBody = document.createElement("div");
   cardBody.classList.add("card-body");
 
   let title = document.createElement("h4");
-  title.innerText = name;
+  title.innerText = document.querySelector("#nameInput").value;
   title.classList.add("card-title");
 
   let para = document.createElement("p");
-  para.innerText = bio;
+  para.innerText = document.querySelector("#bioInput").value;
   para.classList.add("card-text");
 
   cardBody.appendChild(image);
@@ -35,13 +30,26 @@ function createProfile(parentElem, img, name, bio) {
   cardBody.appendChild(para);
   card.appendChild(cardBody);
   parentElem.appendChild(card);
+
+  //clear the input fields
+  document.querySelector("#imageInput").value = "";
+  document.querySelector("#nameInput").value = "";
+  document.querySelector("#bioInput").value = "";
 }
 
-function cardCreationForm(parentElem, label) {
+function createForm(parentElem, label1, label2, label3) {
   //creates a form with 3 inputs and 1 button:img url, name, bio, and create profile
   let form = document.createElement("form");
-  formGroup = createFormGroup(label);
-  form.appendChild(formGroup);
+  formGroup1 = createFormGroup(label1);
+  formGroup2 = createFormGroup(label2);
+  formGroup3 = createFormGroup(label3);
+
+  btn = createCardBtn(parentElem);
+
+  form.appendChild(formGroup1);
+  form.appendChild(formGroup2);
+  form.appendChild(formGroup3);
+  form.appendChild(btn);
   parentElem.appendChild(form);
 }
 
@@ -52,7 +60,9 @@ function createFormGroup(label) {
   let labelElem = document.createElement("label");
   labelElem.innerText = label;
 
+  let inputId = label + "Input";
   let inputElem = document.createElement("input");
+  inputElem.setAttribute("id", inputId);
   inputElem.placeholder = label;
   inputElem.type = "text";
   inputElem.classList.add("form-control");
@@ -61,4 +71,14 @@ function createFormGroup(label) {
   formGroup.appendChild(inputElem);
 
   return formGroup;
+}
+
+function createCardBtn(parentElem) {
+  let btn = document.createElement("button");
+  btn.setAttribute("class", "btn btn-primary");
+  btn.innerText = "Create Card";
+  btn.addEventListener("click", function() {
+    createProfile(parentElem);
+  });
+  return btn;
 }
