@@ -4,7 +4,7 @@ import styles from "./Display.module.css";
 const display = (props) => {
   return (
     <div className={styles.Display}>
-      <div>DISPLAY</div>
+      <div>{props.value}</div>
     </div>
   );
 };

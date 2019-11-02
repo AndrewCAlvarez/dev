@@ -8,14 +8,20 @@ import "./App.css";
 
 class App extends Component {
   state = {
-    buttons: ["AC", "+/-", "%", "/", "X", "-", "+", "=", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    buttons: ["AC", "+/-", "%", "/", "X", "-", "+", "=", 0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+    displayValue: 0,
+    toggled: false
   };
 
   render() {
     return (
       <div className="App">
         <h1>React Calculator</h1>
-        <Cockpit buttons={this.state.buttons} />
+        <Cockpit
+          toggled={this.state.toggled}
+          buttons={this.state.buttons}
+          displayValue={this.state.displayValue}
+        />
       </div>
     );
   }
