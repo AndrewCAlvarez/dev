@@ -5,7 +5,7 @@ const router = express.Router();
 const Item = require("../../models/Item");
 
 // @route   GET api/items
-// @desc    Get All Items
+// @desc    Get All Itemscr
 // @access  Public
 router.get("/", (req, res) => {
   Item.find()
