@@ -1,7 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const app = express();
-const port = 3000;
+const port = 9000;
+app.use(express.json());
+app.use(cors());
 
 var routes = require("./routes/api/routes");
 
@@ -11,12 +14,9 @@ mongoose.connect(keys.mongoURI);
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function() {
-  // we're connected!
+  //    we're connected!
   console.log("MongoDB connected!");
 });
-
-//  Bring in assets from client folder
-// app.use(express.static("./client"));
 
 //  Use routes from routes folder
 app.use("/", routes);
