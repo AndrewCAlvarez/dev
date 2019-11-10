@@ -1,12 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 const app = express();
 const port = 9000;
-app.use(express.json());
-app.use(cors());
 
-var routes = require("./routes/api/routes");
+app.use(cors());
+app.use(bodyParser.json());
+
+var routes = require("./routes/api/playerCharacterRoutes");
 
 //  Connect to MongoDB
 const keys = require("./config/keys");
