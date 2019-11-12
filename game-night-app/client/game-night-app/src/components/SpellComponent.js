@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 
 class Spell extends React.Component {
   render() {

@@ -35,7 +35,12 @@ class PlayerCharacter extends React.Component {
         </div>
       );
     } else {
-      return <img src="https://loading.io/spinners/dual-ring/lg.dual-ring-loader.gif" />;
+      return (
+        <img
+          alt="Loading Image"
+          src="https://loading.io/spinners/dual-ring/lg.dual-ring-loader.gif"
+        />
+      );
     }
   }
 }

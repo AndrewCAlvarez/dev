@@ -2,9 +2,10 @@ const mongoose = require("mongoose");
 
 //  Create the schema
 const playerCharacterSchema = new mongoose.Schema({
-  name: String
-  //   stats: {},
-  //   class: {}
+  name: String,
+  stats: {},
+  class: {},
+  race: {}
   //   spells: {},
   //   items: {}
 });

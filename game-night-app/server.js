@@ -8,7 +8,9 @@ const port = 9000;
 app.use(cors());
 app.use(bodyParser.json());
 
+//  Use routes from routes folder
 var routes = require("./routes/api/playerCharacterRoutes");
+app.use("/", routes);
 
 //  Connect to MongoDB
 const keys = require("./config/keys");
@@ -19,9 +21,6 @@ db.once("open", function() {
   //    we're connected!
   console.log("MongoDB connected!");
 });
-
-//  Use routes from routes folder
-app.use("/", routes);
 
 app.listen(port, () => console.log(`Listening on port ${port}!`));
 
