@@ -1,5 +1,6 @@
 import React from "react";
 import StatFormField from "./StatFormField";
+import ProficiencyFormField from "./ProficiencyFormField";
 const axios = require("axios");
 
 class CreateCharacterForm extends React.Component {
@@ -8,7 +9,15 @@ class CreateCharacterForm extends React.Component {
     this.state = {
       name: "",
       class: "",
-      race: ""
+      proficiencies: "",
+      abilityScores: {},
+      race: "",
+      experience: 0,
+      background: "",
+      alignment: "",
+      physicalCharacteristics: "",
+      items: "",
+      spells: ""
     };
 
     this.formFieldHandler = this.formFieldHandler.bind(this);
@@ -76,6 +85,14 @@ class CreateCharacterForm extends React.Component {
   }
 
   assignRace(playerRace) {
+    //  Set default to dwarf
+    if (this.state.race === "") {
+      axios.get("https://api.open5e.com/races/").then((response) => {
+        this.setState({
+          race: response.data.results[0]
+        });
+      });
+    }
     if (playerRace === "Dwarf") {
       axios.get("https://api.open5e.com/races/").then((response) => {
         this.setState({
@@ -134,6 +151,14 @@ class CreateCharacterForm extends React.Component {
   }
 
   assignClass(playerClass) {
+    //  Set default to barbarian
+    if (this.state.class === "") {
+      axios.get("https://api.open5e.com/classes/").then((response) => {
+        this.setState({
+          class: response.data.results[0]
+        });
+      });
+    }
     if (playerClass === "Barbarian") {
       axios.get("https://api.open5e.com/classes/").then((response) => {
         this.setState({
@@ -210,6 +235,8 @@ class CreateCharacterForm extends React.Component {
   }
 
   render() {
+    this.assignClass();
+    this.assignRace();
     //  If they have selected a spellcaster, then submit button is removed until spells are selected
     return (
       <div>
@@ -229,6 +256,7 @@ class CreateCharacterForm extends React.Component {
           <option value="Warlock">Warlock</option>
           <option value="Wizard">Wizard</option>
         </select>
+        <ProficiencyFormField classProfs={this.state.class.prof_skills} />
         <StatFormField
           data-category="stat"
           onChange={this.formFieldHandler}
