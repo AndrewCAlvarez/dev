@@ -1,5 +1,6 @@
 import React from "react";
 import Spell from "./SpellComponent";
+import loadingGif from "../loading.gif";
 import axios from "axios";
 
 class PlayerCharacter extends React.Component {
@@ -35,12 +36,7 @@ class PlayerCharacter extends React.Component {
         </div>
       );
     } else {
-      return (
-        <img
-          alt="Loading Image"
-          src="https://loading.io/spinners/dual-ring/lg.dual-ring-loader.gif"
-        />
-      );
+      return <img alt="Loading Gif" src={loadingGif} />;
     }
   }
 }

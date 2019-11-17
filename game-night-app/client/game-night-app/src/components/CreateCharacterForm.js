@@ -1,6 +1,7 @@
 import React from "react";
 import StatFormField from "./StatFormField";
 import ProficiencyFormField from "./ProficiencyFormField";
+import loadingGif from "../loading.gif";
 const axios = require("axios");
 
 class CreateCharacterForm extends React.Component {
@@ -24,6 +25,7 @@ class CreateCharacterForm extends React.Component {
     this.sendForm = this.sendForm.bind(this);
     this.assignClass = this.assignClass.bind(this);
     this.assignRace = this.assignRace.bind(this);
+    this.assignProficiencies = this.assignProficiencies.bind(this);
   }
 
   sendForm(event) {
@@ -234,6 +236,10 @@ class CreateCharacterForm extends React.Component {
     }
   }
 
+  assignProficiencies(playerProficiencies) {
+    console.log("Proficiency changed");
+  }
+
   render() {
     this.assignClass();
     this.assignRace();
@@ -256,33 +262,42 @@ class CreateCharacterForm extends React.Component {
           <option value="Warlock">Warlock</option>
           <option value="Wizard">Wizard</option>
         </select>
-        <ProficiencyFormField classProfs={this.state.class.prof_skills} />
-        <StatFormField
-          data-category="stat"
-          onChange={this.formFieldHandler}
-          placeholder="Strength"
+        <ProficiencyFormField
+          classProfs={this.state.class.prof_skills}
+          playerClass={this.state.class}
         />
-        <StatFormField
-          data-category="stat"
-          onChange={this.formFieldHandler}
-          placeholder="Dexterity"
-        />
-        <StatFormField
-          data-category="stat"
-          onChange={this.formFieldHandler}
-          placeholder="Constitution"
-        />
-        <StatFormField
-          data-category="stat"
-          onChange={this.formFieldHandler}
-          placeholder="Intelligence"
-        />
-        <StatFormField data-category="stat" onChange={this.formFieldHandler} placeholder="Wisdom" />
-        <StatFormField
-          data-category="stat"
-          onChange={this.formFieldHandler}
-          placeholder="Charisma"
-        />
+        <div>
+          <StatFormField
+            data-category="stat"
+            onChange={this.formFieldHandler}
+            placeholder="Strength"
+          />
+          <StatFormField
+            data-category="stat"
+            onChange={this.formFieldHandler}
+            placeholder="Dexterity"
+          />
+          <StatFormField
+            data-category="stat"
+            onChange={this.formFieldHandler}
+            placeholder="Constitution"
+          />
+          <StatFormField
+            data-category="stat"
+            onChange={this.formFieldHandler}
+            placeholder="Intelligence"
+          />
+          <StatFormField
+            data-category="stat"
+            onChange={this.formFieldHandler}
+            placeholder="Wisdom"
+          />
+          <StatFormField
+            data-category="stat"
+            onChange={this.formFieldHandler}
+            placeholder="Charisma"
+          />
+        </div>
         <label>Race</label>
         <select data-category="race" name="race" onChange={this.formFieldHandler}>
           <option value="Dwarf">Dwarf</option>
