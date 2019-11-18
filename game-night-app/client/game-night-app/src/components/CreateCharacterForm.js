@@ -1,6 +1,7 @@
 import React from "react";
 import StatFormField from "./StatFormField";
 import ProficiencyFormField from "./ProficiencyFormField";
+import BackgroundFormField from "./BackgroundFormField";
 import loadingGif from "../loading.gif";
 const axios = require("axios");
 
@@ -10,11 +11,11 @@ class CreateCharacterForm extends React.Component {
     this.state = {
       name: "",
       class: "",
-      proficiencies: "",
+      proficiencies: [],
       abilityScores: {},
       race: "",
       experience: 0,
-      background: "",
+      background: null,
       alignment: "",
       physicalCharacteristics: "",
       items: "",
@@ -26,6 +27,7 @@ class CreateCharacterForm extends React.Component {
     this.assignClass = this.assignClass.bind(this);
     this.assignRace = this.assignRace.bind(this);
     this.assignProficiencies = this.assignProficiencies.bind(this);
+    this.assignBackground = this.assignBackground.bind(this);
   }
 
   sendForm(event) {
@@ -79,6 +81,10 @@ class CreateCharacterForm extends React.Component {
         name: event.target.value
       });
     } else if (category === "class") {
+      //  Start by resetting the proficiencies
+      this.setState({
+        proficiencies: []
+      });
       this.assignClass(event.target.value);
     } else if (category === "race") {
       this.assignRace(event.target.value);
@@ -236,13 +242,44 @@ class CreateCharacterForm extends React.Component {
     }
   }
 
-  assignProficiencies(playerProficiencies) {
-    console.log("Proficiency changed");
+  assignProficiencies(playerProficiencies, isChecked) {
+    let profs = this.state.proficiencies;
+    let isDuplicate = false;
+    profs.forEach((element, index) => {
+      if (element === playerProficiencies) {
+        isDuplicate = true;
+        profs.splice(index, index + 1);
+      }
+    });
+    if (!isDuplicate) {
+      profs.push(playerProficiencies);
+      this.setState({
+        proficiencies: profs
+      });
+    } else {
+      this.setState({
+        proficiencies: profs
+      });
+    }
+    console.log(this.state.proficiencies);
+  }
+
+  assignBackground(newBackground) {
+    console.log(newBackground);
+    //  Set default background
+    if (this.state.background === null) {
+      axios.get("https://api.open5e.com/backgrounds/").then((response) => {
+        this.setState({
+          background: response.data.results[0]
+        });
+      });
+    }
   }
 
   render() {
     this.assignClass();
     this.assignRace();
+    this.assignBackground();
     //  If they have selected a spellcaster, then submit button is removed until spells are selected
     return (
       <div>
@@ -265,6 +302,8 @@ class CreateCharacterForm extends React.Component {
         <ProficiencyFormField
           classProfs={this.state.class.prof_skills}
           playerClass={this.state.class}
+          onProfChange={this.assignProficiencies}
+          proficiencies={this.state.proficiencies}
         />
         <div>
           <StatFormField
@@ -310,6 +349,10 @@ class CreateCharacterForm extends React.Component {
           <option value="Half-Orc">Half-Orc</option>
           <option value="Tiefling">Tiefling</option>
         </select>
+        <BackgroundFormField
+          playerBackground={this.state.background}
+          onBackgroundChange={this.assignBackground}
+        />
         <input type="submit" value="Send" onClick={this.sendForm}></input>
       </div>
     );
