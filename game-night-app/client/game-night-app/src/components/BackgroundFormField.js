@@ -7,10 +7,12 @@ class BackgroundFormField extends React.Component {
     super(props);
 
     this.state = {
-      backgrounds: ""
+      backgrounds: "",
+      showMore: false
     };
 
     this.getBackgrounds = this.getBackgrounds.bind(this);
+    this.showInfo = this.showInfo.bind(this);
   }
 
   getBackgrounds() {
@@ -28,18 +30,26 @@ class BackgroundFormField extends React.Component {
   }
 
   handleChange(element) {
-    // console.log(element);
     this.props.onBackgroundChange(element);
   }
 
   createButtons() {
     let buttonArray = [];
-    this.state.backgrounds.forEach((element) => {
-      console.log("ELEMENT:" + element);
+    this.state.backgrounds.forEach((element, index) => {
       let name = element.name;
-      buttonArray.push(<button onClick={(name) => this.handleChange(name)}>{name}</button>);
+      buttonArray.push(
+        <button key={name + index} onClick={() => this.handleChange(element)}>
+          {name}
+        </button>
+      );
     });
     return buttonArray;
+  }
+
+  showInfo() {
+    this.setState({
+      showMore: !this.state.showMore
+    });
   }
 
   render() {
@@ -48,19 +58,31 @@ class BackgroundFormField extends React.Component {
       return <img alt="loading" src={loadingGif} />;
     } else {
       let buttonArray = this.createButtons();
-      return (
-        <div>
-          {buttonArray}
-          <p>{this.props.playerBackground.name}</p>
-          <p>{this.props.playerBackground.desc}</p>
-          <p>Additional skills: {this.props.playerBackground.skill_proficiencies}</p>
-          <p>{this.props.playerBackground.tool_proficiencies}</p>
-          <p>Languages: {this.props.playerBackground.languages}</p>
-          <p>Additional equipment: {this.props.playerBackground.equipment}</p>
-          <p>{this.props.playerBackground.feature}</p>
-          <p>{this.props.playerBackground.feature_desc}</p>
-        </div>
-      );
+      if (this.state.showMore) {
+        return (
+          <div>
+            {buttonArray}
+            <p>{this.props.playerBackground.name}</p>
+            <p>{this.props.playerBackground.desc}</p>
+            <p>Additional skills: {this.props.playerBackground.skill_proficiencies}</p>
+            <p>{this.props.playerBackground.tool_proficiencies}</p>
+            <p>Languages: {this.props.playerBackground.languages}</p>
+            <p>Additional equipment: {this.props.playerBackground.equipment}</p>
+            <p>{this.props.playerBackground.feature}</p>
+            <p>{this.props.playerBackground.feature_desc}</p>
+            <button onClick={this.showInfo}>Show Less Background Info</button>
+          </div>
+        );
+      } else {
+        return (
+          <div>
+            {buttonArray}
+            <p>{this.props.playerBackground.name}</p>
+            <p>{this.props.playerBackground.desc}</p>
+            <button onClick={this.showInfo}>Show More Background Info</button>
+          </div>
+        );
+      }
     }
   }
 }

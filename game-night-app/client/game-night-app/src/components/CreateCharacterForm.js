@@ -2,6 +2,7 @@ import React from "react";
 import StatFormField from "./StatFormField";
 import ProficiencyFormField from "./ProficiencyFormField";
 import BackgroundFormField from "./BackgroundFormField";
+import TextComponent from "./TextComponent";
 import loadingGif from "../loading.gif";
 const axios = require("axios");
 
@@ -16,10 +17,11 @@ class CreateCharacterForm extends React.Component {
       race: "",
       experience: 0,
       background: null,
-      alignment: "",
+      alignment: "lawful good",
       physicalCharacteristics: "",
       items: "",
-      spells: ""
+      spells: "",
+      isCaster: false
     };
 
     this.formFieldHandler = this.formFieldHandler.bind(this);
@@ -28,6 +30,8 @@ class CreateCharacterForm extends React.Component {
     this.assignRace = this.assignRace.bind(this);
     this.assignProficiencies = this.assignProficiencies.bind(this);
     this.assignBackground = this.assignBackground.bind(this);
+    this.handleBackgroundChange = this.handleBackgroundChange.bind(this);
+    this.handlePhysicalCharacteristicsChange = this.handlePhysicalCharacteristicsChange.bind(this);
   }
 
   sendForm(event) {
@@ -89,6 +93,10 @@ class CreateCharacterForm extends React.Component {
     } else if (category === "race") {
       this.assignRace(event.target.value);
     } else if (category === "stat") {
+    } else if (category === "alignment") {
+      this.setState({
+        alignment: event.target.value
+      });
     }
   }
 
@@ -170,73 +178,85 @@ class CreateCharacterForm extends React.Component {
     if (playerClass === "Barbarian") {
       axios.get("https://api.open5e.com/classes/").then((response) => {
         this.setState({
-          class: response.data.results[0]
+          class: response.data.results[0],
+          isCaster: false
         });
       });
     } else if (playerClass === "Bard") {
       axios.get("https://api.open5e.com/classes/").then((response) => {
         this.setState({
-          class: response.data.results[1]
+          class: response.data.results[1],
+          isCaster: true
         });
       });
     } else if (playerClass === "Cleric") {
       axios.get("https://api.open5e.com/classes/").then((response) => {
         this.setState({
-          class: response.data.results[2]
+          class: response.data.results[2],
+          isCaster: true
         });
       });
     } else if (playerClass === "Druid") {
       axios.get("https://api.open5e.com/classes/").then((response) => {
         this.setState({
-          class: response.data.results[3]
+          class: response.data.results[3],
+          isCaster: true
         });
       });
     } else if (playerClass === "Fighter") {
       axios.get("https://api.open5e.com/classes/").then((response) => {
         this.setState({
-          class: response.data.results[4]
+          class: response.data.results[4],
+          isCaster: false
         });
       });
     } else if (playerClass === "Monk") {
       axios.get("https://api.open5e.com/classes/").then((response) => {
         this.setState({
-          class: response.data.results[5]
+          class: response.data.results[5],
+          isCaster: false
         });
       });
     } else if (playerClass === "Paladin") {
       axios.get("https://api.open5e.com/classes/").then((response) => {
         this.setState({
-          class: response.data.results[6]
+          class: response.data.results[6],
+          isCaster: true
         });
       });
     } else if (playerClass === "Ranger") {
       axios.get("https://api.open5e.com/classes/").then((response) => {
         this.setState({
-          class: response.data.results[7]
+          class: response.data.results[7],
+          isCaster: true
         });
       });
     } else if (playerClass === "Rogue") {
       axios.get("https://api.open5e.com/classes/").then((response) => {
         this.setState({
-          class: response.data.results[8]
+          class: response.data.results[8],
+          isCaster: false
         });
       });
     } else if (playerClass === "Sorcerer") {
       axios.get("https://api.open5e.com/classes/").then((response) => {
         this.setState({
-          class: response.data.results[9]
+          class: response.data.results[9],
+          isCaster: true
         });
       });
     } else if (playerClass === "Warlock") {
       axios.get("https://api.open5e.com/classes/").then((response) => {
         this.setState({
-          class: response.data.results[10]
+          class: response.data.results[10],
+          isCaster: true
         });
       });
     } else if (playerClass === "Wizard") {
       axios.get("https://api.open5e.com/classes/").then((response) => {
         this.setState({
-          class: response.data.results[11]
+          class: response.data.results[11],
+          isCaster: true
         });
       });
     }
@@ -264,8 +284,7 @@ class CreateCharacterForm extends React.Component {
     console.log(this.state.proficiencies);
   }
 
-  assignBackground(newBackground) {
-    console.log(newBackground);
+  assignBackground() {
     //  Set default background
     if (this.state.background === null) {
       axios.get("https://api.open5e.com/backgrounds/").then((response) => {
@@ -274,6 +293,18 @@ class CreateCharacterForm extends React.Component {
         });
       });
     }
+  }
+
+  handleBackgroundChange(newBackground) {
+    this.setState({
+      background: newBackground
+    });
+  }
+
+  handlePhysicalCharacteristicsChange(newText) {
+    this.setState({
+      physicalCharacteristics: newText
+    });
   }
 
   render() {
@@ -351,7 +382,22 @@ class CreateCharacterForm extends React.Component {
         </select>
         <BackgroundFormField
           playerBackground={this.state.background}
-          onBackgroundChange={this.assignBackground}
+          onBackgroundChange={this.handleBackgroundChange}
+        />
+        <select data-category="alignment" name="alignment" onChange={this.formFieldHandler}>
+          <option value="lawfulGood">lawfulGood</option>
+          <option value="neutralGood">neutralGood</option>
+          <option value="chaoticGood">chaoticGood</option>
+          <option value="lawfulNeutral">lawfulNeutral</option>
+          <option value="neutral">neutral</option>
+          <option value="chaoticNeutral">chaoticNeutral</option>
+          <option value="lawfulEvil">lawfulEvil</option>
+          <option value="neutralEvil">neutralEvil</option>
+          <option value="chaoticEvil">chaoticEvil</option>
+        </select>
+        <TextComponent
+          text={this.state.physicalCharacteristics}
+          onTextChange={this.handlePhysicalCharacteristicsChange}
         />
         <input type="submit" value="Send" onClick={this.sendForm}></input>
       </div>
