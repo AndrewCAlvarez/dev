@@ -12,11 +12,16 @@ router.get("/playerCharacter", (req, res) => {
 
 //  CREATE post new playerCharacter to db
 router.post("/playerCharacter", (req, res) => {
+  console.log(req.body);
   let newPlayerCharacter = new playerCharacter({
     name: req.body.name,
     class: req.body.class,
     race: req.body.race,
-    stats: req.body.stats
+    proficiencies: req.body.proficiencies,
+    stats: req.body.stats,
+    background: req.body.background,
+    alignment: req.body.alignment,
+    about: req.body.about
   });
 
   newPlayerCharacter.save(function(err, newPlayerCharacter) {

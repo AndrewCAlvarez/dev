@@ -9,11 +9,16 @@ function createOption(num) {
   return e;
 }
 
+function changeStat(props, e) {
+  let name = props.placeholder.toLowerCase();
+  props.onStatChange(name, e);
+}
+
 function StatFormField(props) {
   return (
     <div>
       <label value={props.placeholder}>{props.placeholder}</label>
-      <select>{createOption(21)}</select>
+      <select onChange={(e) => changeStat(props, e)}>{createOption(21)}</select>
     </div>
   );
 }

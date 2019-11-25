@@ -24,7 +24,7 @@ class ProficiencyFormField extends React.Component {
   }
 
   handleChange(element, e) {
-    this.props.onProfChange(element, e.target.checked);
+    this.props.onProfChange(element);
   }
 
   render() {

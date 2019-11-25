@@ -25,13 +25,20 @@ class CreateCharacterForm extends React.Component {
     this.state = {
       name: "",
       class: "",
-      proficiencies: [],
-      abilityScores: {},
       race: "",
+      proficiencies: [],
+      stats: {
+        strength: 8,
+        constitution: 8,
+        dexterity: 8,
+        intelligence: 8,
+        wisdom: 8,
+        charisma: 8
+      },
       experience: 0,
       background: null,
       alignment: "lawful good",
-      physicalCharacteristics: "",
+      about: "",
       items: "",
       spells: "",
       isCaster: false
@@ -42,31 +49,26 @@ class CreateCharacterForm extends React.Component {
     this.assignClass = this.assignClass.bind(this);
     this.assignRace = this.assignRace.bind(this);
     this.assignProficiencies = this.assignProficiencies.bind(this);
+    this.assignStats = this.assignStats.bind(this);
     this.assignBackground = this.assignBackground.bind(this);
     this.handleBackgroundChange = this.handleBackgroundChange.bind(this);
-    this.handlePhysicalCharacteristicsChange = this.handlePhysicalCharacteristicsChange.bind(this);
+    this.handleAboutChange = this.handleAboutChange.bind(this);
   }
 
   sendForm(event) {
     if (this.state.name === "") {
       window.alert("Please enter a name.");
     } else {
-      console.log(this.state.race);
       axios
         .post("http://localhost:9000/playerCharacter", {
           name: this.state.name,
           class: this.state.class,
           race: this.state.race,
           proficiencies: this.state.proficiencies,
-          abilityScores: this.state.abilityScores,
-          race: this.state.race,
-          experience: 0,
+          stats: this.state.stats,
           background: this.state.background,
           alignment: this.state.alignment,
-          physicalCharacteristics: this.state.physicalCharacteristics,
-          items: this.state.items,
-          spells: this.state.spells,
-          isCaster: false
+          about: this.state.about
         })
         .then(function(response) {
           console.log(response);
@@ -94,7 +96,6 @@ class CreateCharacterForm extends React.Component {
       this.assignClass(event.target.value);
     } else if (category === "race") {
       this.assignRace(event.target.value);
-    } else if (category === "stat") {
     } else if (category === "alignment") {
       this.setState({
         alignment: event.target.value
@@ -264,17 +265,18 @@ class CreateCharacterForm extends React.Component {
     }
   }
 
-  assignProficiencies(playerProficiencies, isChecked) {
+  assignProficiencies(playerProficiency) {
     let profs = this.state.proficiencies;
-    let isDuplicate = false;
+    let duplicate = false;
     profs.forEach((element, index) => {
-      if (element === playerProficiencies) {
-        isDuplicate = true;
-        profs.splice(index, index + 1);
+      //  check if proficiency is duplicate and remove from array
+      if (element === playerProficiency) {
+        duplicate = true;
+        profs.splice(index);
       }
     });
-    if (!isDuplicate) {
-      profs.push(playerProficiencies);
+    if (!duplicate) {
+      profs.push(playerProficiency);
       this.setState({
         proficiencies: profs
       });
@@ -297,15 +299,33 @@ class CreateCharacterForm extends React.Component {
     }
   }
 
+  assignStats(name, e) {
+    let stats = this.state.stats;
+    if (name === "strength") {
+      stats.strength = e.target.value;
+    } else if (name === "constitution") {
+      stats.constitution = e.target.value;
+    } else if (name === "dexterity") {
+      stats.dexterity = e.target.value;
+    } else if (name === "intelligence") {
+      stats.intelligence = e.target.value;
+    } else if (name === "wisdom") {
+      stats.wisdom = e.target.value;
+    } else if (name === "charisma") {
+      stats.charisma = e.target.value;
+      console.log(this.state.stats);
+    }
+  }
+
   handleBackgroundChange(newBackground) {
     this.setState({
       background: newBackground
     });
   }
 
-  handlePhysicalCharacteristicsChange(newText) {
+  handleAboutChange(newText) {
     this.setState({
-      physicalCharacteristics: newText
+      about: newText
     });
   }
 
@@ -373,48 +393,6 @@ class CreateCharacterForm extends React.Component {
           <option value="Warlock">Warlock</option>
           <option value="Wizard">Wizard</option>
         </select>
-
-        <div className="test--container">
-          <ProficiencyFormField
-            classProfs={this.state.class.prof_skills}
-            playerClass={this.state.class}
-            onProfChange={this.assignProficiencies}
-            proficiencies={this.state.proficiencies}
-          />
-
-          <div className="stats--container">
-            <StatFormField
-              data-category="stat"
-              onChange={this.formFieldHandler}
-              placeholder="Strength"
-            />
-            <StatFormField
-              data-category="stat"
-              onChange={this.formFieldHandler}
-              placeholder="Dexterity"
-            />
-            <StatFormField
-              data-category="stat"
-              onChange={this.formFieldHandler}
-              placeholder="Constitution"
-            />
-            <StatFormField
-              data-category="stat"
-              onChange={this.formFieldHandler}
-              placeholder="Intelligence"
-            />
-            <StatFormField
-              data-category="stat"
-              onChange={this.formFieldHandler}
-              placeholder="Wisdom"
-            />
-            <StatFormField
-              data-category="stat"
-              onChange={this.formFieldHandler}
-              placeholder="Charisma"
-            />
-          </div>
-        </div>
         <label>Race</label>
         <select data-category="race" name="race" onChange={this.formFieldHandler}>
           <option value="Dwarf">Dwarf</option>
@@ -427,26 +405,64 @@ class CreateCharacterForm extends React.Component {
           <option value="Half-Orc">Half-Orc</option>
           <option value="Tiefling">Tiefling</option>
         </select>
+        <div className="test--container">
+          <ProficiencyFormField
+            classProfs={this.state.class.prof_skills}
+            playerClass={this.state.class}
+            onProfChange={this.assignProficiencies}
+            proficiencies={this.state.proficiencies}
+          />
+          <div className="stats--container">
+            <StatFormField
+              data-category="stat"
+              onStatChange={this.assignStats}
+              placeholder="Strength"
+            />
+            <StatFormField
+              data-category="stat"
+              onStatChange={this.assignStats}
+              placeholder="Dexterity"
+            />
+            <StatFormField
+              data-category="stat"
+              onStatChange={this.assignStats}
+              placeholder="Constitution"
+            />
+            <StatFormField
+              data-category="stat"
+              onStatChange={this.assignStats}
+              placeholder="Intelligence"
+            />
+            <StatFormField
+              data-category="stat"
+              onStatChange={this.assignStats}
+              placeholder="Wisdom"
+            />
+            <StatFormField
+              data-category="stat"
+              onStatChange={this.assignStats}
+              placeholder="Charisma"
+            />
+          </div>
+        </div>
+
         <BackgroundFormField
           playerBackground={this.state.background}
           onBackgroundChange={this.handleBackgroundChange}
         />
         <select data-category="alignment" name="alignment" onChange={this.formFieldHandler}>
-          <option value="lawfulGood">lawfulGood</option>
-          <option value="neutralGood">neutralGood</option>
-          <option value="chaoticGood">chaoticGood</option>
-          <option value="lawfulNeutral">lawfulNeutral</option>
-          <option value="neutral">neutral</option>
-          <option value="chaoticNeutral">chaoticNeutral</option>
-          <option value="lawfulEvil">lawfulEvil</option>
-          <option value="neutralEvil">neutralEvil</option>
-          <option value="chaoticEvil">chaoticEvil</option>
+          <option value="lawfulGood">Lawful Good</option>
+          <option value="neutralGood">Neutral Good</option>
+          <option value="chaoticGood">Chaotic Good</option>
+          <option value="lawfulNeutral">Lawful Neutral</option>
+          <option value="neutral">Neutral</option>
+          <option value="chaoticNeutral">Chaotic Neutral</option>
+          <option value="lawfulEvil">Lawful Evil</option>
+          <option value="neutralEvil">Neutral Evil</option>
+          <option value="chaoticEvil">Chaotic Evil</option>
         </select>
-        <TextComponent
-          text={this.state.physicalCharacteristics}
-          onTextChange={this.handlePhysicalCharacteristicsChange}
-        />
-        <input type="submit" value="Send" onClick={this.sendForm}></input>
+        <TextComponent text={this.state.about} onTextChange={this.handleAboutChange} />
+        <input type="submit" value={"Create " + this.state.name} onClick={this.sendForm}></input>
       </div>
     );
   }

@@ -3,9 +3,13 @@ const mongoose = require("mongoose");
 //  Create the schema
 const playerCharacterSchema = new mongoose.Schema({
   name: String,
-  stats: {},
   class: {},
-  race: {}
+  race: {},
+  proficiencies: [],
+  stats: {},
+  background: {},
+  alignment: String,
+  about: String
   //   spells: {},
   //   items: {}
 });
