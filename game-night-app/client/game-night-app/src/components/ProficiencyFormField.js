@@ -64,7 +64,7 @@ class ProficiencyFormField extends React.Component {
         availableSkills.forEach((element, index) => {
           if (index === 0) {
             renderItems.push(
-              <div key={"proficiency" + index}>
+              <div key={"proficiency" + index} className="prof--item">
                 <p>Please select fewer proficiencies.</p>
                 <label>{element}</label>
                 <input type="checkbox" onChange={(e) => this.handleChange(element, e)} />
@@ -72,7 +72,7 @@ class ProficiencyFormField extends React.Component {
             );
           } else {
             renderItems.push(
-              <div key={"proficiency" + index}>
+              <div key={"proficiency" + index} className="prof--item">
                 <label>{element}</label>
                 <input type="checkbox" onChange={(e) => this.handleChange(element, e)} />
               </div>
@@ -82,7 +82,7 @@ class ProficiencyFormField extends React.Component {
       } else if (this.props.proficiencies.length === 0) {
         availableSkills.forEach((element, index) => {
           renderItems.push(
-            <div key={"proficiency" + index}>
+            <div key={"proficiency" + index} className="prof--item">
               <label>{element}</label>
               <input
                 type="checkbox"
@@ -95,7 +95,7 @@ class ProficiencyFormField extends React.Component {
       } else {
         availableSkills.forEach((element, index) => {
           renderItems.push(
-            <div key={"proficiency" + index}>
+            <div key={"proficiency" + index} className="prof--item">
               <label>{element}</label>
               <input type="checkbox" onChange={(e) => this.handleChange(element, e)} />
             </div>
@@ -103,9 +103,9 @@ class ProficiencyFormField extends React.Component {
         });
       }
       return (
-        <div>
-          <p>{this.props.classProfs}</p>
-          <div>{renderItems}</div>
+        <div className="prof--container">
+          <p className="prof--choiceText">{this.props.classProfs}</p>
+          {renderItems}
         </div>
       );
     }

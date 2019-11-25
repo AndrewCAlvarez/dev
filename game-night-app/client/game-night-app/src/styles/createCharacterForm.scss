@@ -1,0 +1,33 @@
+.test--container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .stats--container {
+    border: 1px solid black;
+    width: 48%;
+  }
+
+  .prof--container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 1px solid black;
+    width: 48%;
+    .prof--item {
+      padding: 1px;
+      border: 1px solid black;
+      width: 33%;
+      max-width: 200px;
+      max-height: 25px;
+      &:hover {
+        background-color: green;
+      }
+    }
+    .prof--choiceText {
+      width: 100%;
+    }
+  }
+}

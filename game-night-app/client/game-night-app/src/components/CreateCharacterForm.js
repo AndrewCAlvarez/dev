@@ -4,8 +4,21 @@ import ProficiencyFormField from "./ProficiencyFormField";
 import BackgroundFormField from "./BackgroundFormField";
 import TextComponent from "./TextComponent";
 import loadingGif from "../loading.gif";
+import bootstrap from "../bootstrap.min.css";
+import CreateCharacterFormStyles from "./../styles/createCharacterForm.css";
 const axios = require("axios");
 
+/*
+  To-dos:
+  - add stats values to state
+  - spells
+  - items
+  - send form data to mongodb
+  - login with OAuth
+  - social login
+  - socket.io so multiple people can see eachother's cards and exchange information.
+
+*/
 class CreateCharacterForm extends React.Component {
   constructor(props) {
     super(props);
@@ -38,42 +51,31 @@ class CreateCharacterForm extends React.Component {
     if (this.state.name === "") {
       window.alert("Please enter a name.");
     } else {
-      if (this.state.class === "") {
-        axios.get("https://api.open5e.com/classes/").then((response) => {
-          this.setState({
-            class: response.data.results[0]
-          });
-          console.log(this.state.class);
+      console.log(this.state.race);
+      axios
+        .post("http://localhost:9000/playerCharacter", {
+          name: this.state.name,
+          class: this.state.class,
+          race: this.state.race,
+          proficiencies: this.state.proficiencies,
+          abilityScores: this.state.abilityScores,
+          race: this.state.race,
+          experience: 0,
+          background: this.state.background,
+          alignment: this.state.alignment,
+          physicalCharacteristics: this.state.physicalCharacteristics,
+          items: this.state.items,
+          spells: this.state.spells,
+          isCaster: false
+        })
+        .then(function(response) {
+          console.log(response);
+        })
+        .catch(function(error) {
+          console.log(error);
         });
-        axios
-          .post("http://localhost:9000/playerCharacter", {
-            name: this.state.name,
-            class: this.state.class,
-            race: this.state.race
-          })
-          .then(function(response) {
-            console.log(response);
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
-      } else {
-        console.log(this.state.race);
-        axios
-          .post("http://localhost:9000/playerCharacter", {
-            name: this.state.name,
-            class: this.state.class,
-            race: this.state.race
-          })
-          .then(function(response) {
-            console.log(response);
-          })
-          .catch(function(error) {
-            console.log(error);
-          });
-        event.preventDefault();
-        console.log("FORM SENT");
-      }
+      event.preventDefault();
+      console.log("FORM SENT");
     }
   }
 
@@ -314,6 +316,47 @@ class CreateCharacterForm extends React.Component {
     //  If they have selected a spellcaster, then submit button is removed until spells are selected
     return (
       <div>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+          <a class="navbar-brand" href="#">
+            Game Night
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarColor01"
+            aria-controls="navbarColor01"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">
+                  Home <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  Features
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  Pricing
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  About
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
         <label>Name</label>
         <input data-category="name" placeholder="name" onChange={this.formFieldHandler}></input>
         <select data-category="class" name="class" onChange={this.formFieldHandler}>
@@ -330,43 +373,47 @@ class CreateCharacterForm extends React.Component {
           <option value="Warlock">Warlock</option>
           <option value="Wizard">Wizard</option>
         </select>
-        <ProficiencyFormField
-          classProfs={this.state.class.prof_skills}
-          playerClass={this.state.class}
-          onProfChange={this.assignProficiencies}
-          proficiencies={this.state.proficiencies}
-        />
-        <div>
-          <StatFormField
-            data-category="stat"
-            onChange={this.formFieldHandler}
-            placeholder="Strength"
+
+        <div className="test--container">
+          <ProficiencyFormField
+            classProfs={this.state.class.prof_skills}
+            playerClass={this.state.class}
+            onProfChange={this.assignProficiencies}
+            proficiencies={this.state.proficiencies}
           />
-          <StatFormField
-            data-category="stat"
-            onChange={this.formFieldHandler}
-            placeholder="Dexterity"
-          />
-          <StatFormField
-            data-category="stat"
-            onChange={this.formFieldHandler}
-            placeholder="Constitution"
-          />
-          <StatFormField
-            data-category="stat"
-            onChange={this.formFieldHandler}
-            placeholder="Intelligence"
-          />
-          <StatFormField
-            data-category="stat"
-            onChange={this.formFieldHandler}
-            placeholder="Wisdom"
-          />
-          <StatFormField
-            data-category="stat"
-            onChange={this.formFieldHandler}
-            placeholder="Charisma"
-          />
+
+          <div className="stats--container">
+            <StatFormField
+              data-category="stat"
+              onChange={this.formFieldHandler}
+              placeholder="Strength"
+            />
+            <StatFormField
+              data-category="stat"
+              onChange={this.formFieldHandler}
+              placeholder="Dexterity"
+            />
+            <StatFormField
+              data-category="stat"
+              onChange={this.formFieldHandler}
+              placeholder="Constitution"
+            />
+            <StatFormField
+              data-category="stat"
+              onChange={this.formFieldHandler}
+              placeholder="Intelligence"
+            />
+            <StatFormField
+              data-category="stat"
+              onChange={this.formFieldHandler}
+              placeholder="Wisdom"
+            />
+            <StatFormField
+              data-category="stat"
+              onChange={this.formFieldHandler}
+              placeholder="Charisma"
+            />
+          </div>
         </div>
         <label>Race</label>
         <select data-category="race" name="race" onChange={this.formFieldHandler}>

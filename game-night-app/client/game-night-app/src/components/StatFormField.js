@@ -3,8 +3,8 @@ import React from "react";
 function createOption(num) {
   let i = 0;
   let e = [];
-  for (i = 1; i < num; i++) {
-    e.push(React.createElement("option", null, i));
+  for (i = 8; i < num; i++) {
+    e.push(<option>{i}</option>);
   }
   return e;
 }
