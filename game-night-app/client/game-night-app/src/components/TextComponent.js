@@ -12,7 +12,6 @@ class TextComponent extends React.Component {
   render() {
     return (
       <div>
-        <p>Characteristics</p>
         <textarea onChange={(e) => this.handleChange(e)} />
       </div>
     );

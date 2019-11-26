@@ -5,20 +5,9 @@ import BackgroundFormField from "./BackgroundFormField";
 import TextComponent from "./TextComponent";
 import loadingGif from "../loading.gif";
 import bootstrap from "../bootstrap.min.css";
-import CreateCharacterFormStyles from "./../styles/createCharacterForm.css";
+import CreateCharacterFormStyles from "./../styles/createCharacterFormStyles/createCharacterForm.css";
 const axios = require("axios");
 
-/*
-  To-dos:
-  - add stats values to state
-  - spells
-  - items
-  - send form data to mongodb
-  - login with OAuth
-  - social login
-  - socket.io so multiple people can see eachother's cards and exchange information.
-
-*/
 class CreateCharacterForm extends React.Component {
   constructor(props) {
     super(props);
@@ -336,133 +325,112 @@ class CreateCharacterForm extends React.Component {
     //  If they have selected a spellcaster, then submit button is removed until spells are selected
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-          <a class="navbar-brand" href="#">
-            Game Night
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarColor01"
-            aria-controls="navbarColor01"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">
-                  Home <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Features
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  Pricing
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  About
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-        <label>Name</label>
-        <input data-category="name" placeholder="name" onChange={this.formFieldHandler}></input>
-        <select data-category="class" name="class" onChange={this.formFieldHandler}>
-          <option value="Barbarian">Barbarian</option>
-          <option value="Bard">Bard</option>
-          <option value="Cleric">Cleric</option>
-          <option value="Druid">Druid</option>
-          <option value="Fighter">Fighter</option>
-          <option value="Monk">Monk</option>
-          <option value="Paladin">Paladin</option>
-          <option value="Ranger">Ranger</option>
-          <option value="Rogue">Rogue</option>
-          <option value="Sorcerer">Sorcerer</option>
-          <option value="Warlock">Warlock</option>
-          <option value="Wizard">Wizard</option>
-        </select>
-        <label>Race</label>
-        <select data-category="race" name="race" onChange={this.formFieldHandler}>
-          <option value="Dwarf">Dwarf</option>
-          <option value="Elf">Elf</option>
-          <option value="Halfling">Halfling</option>
-          <option value="Human">Human</option>
-          <option value="Dragonborn">Dragonborn</option>
-          <option value="Gnome">Gnome</option>
-          <option value="Half-Elf">Half-Elf</option>
-          <option value="Half-Orc">Half-Orc</option>
-          <option value="Tiefling">Tiefling</option>
-        </select>
-        <div className="test--container">
+        <div className="container container--name">
+          <label>Name</label>
+          <input data-category="name" placeholder="name" onChange={this.formFieldHandler}></input>
+        </div>
+        <div className="container container--class">
+          <label>Class</label>
+          <select data-category="class" name="class" onChange={this.formFieldHandler}>
+            <option value="Barbarian">Barbarian</option>
+            <option value="Bard">Bard</option>
+            <option value="Cleric">Cleric</option>
+            <option value="Druid">Druid</option>
+            <option value="Fighter">Fighter</option>
+            <option value="Monk">Monk</option>
+            <option value="Paladin">Paladin</option>
+            <option value="Ranger">Ranger</option>
+            <option value="Rogue">Rogue</option>
+            <option value="Sorcerer">Sorcerer</option>
+            <option value="Warlock">Warlock</option>
+            <option value="Wizard">Wizard</option>
+          </select>
+        </div>
+        <div className="container container--race">
+          <label>Race</label>
+          <select data-category="race" name="race" onChange={this.formFieldHandler}>
+            <option value="Dwarf">Dwarf</option>
+            <option value="Elf">Elf</option>
+            <option value="Halfling">Halfling</option>
+            <option value="Human">Human</option>
+            <option value="Dragonborn">Dragonborn</option>
+            <option value="Gnome">Gnome</option>
+            <option value="Half-Elf">Half-Elf</option>
+            <option value="Half-Orc">Half-Orc</option>
+            <option value="Tiefling">Tiefling</option>
+          </select>
+        </div>
+        <div className="container container--stats">
+          <label>Ability Scores</label>
+          <StatFormField
+            data-category="stat"
+            onStatChange={this.assignStats}
+            placeholder="Strength"
+          />
+          <StatFormField
+            data-category="stat"
+            onStatChange={this.assignStats}
+            placeholder="Dexterity"
+          />
+          <StatFormField
+            data-category="stat"
+            onStatChange={this.assignStats}
+            placeholder="Constitution"
+          />
+          <StatFormField
+            data-category="stat"
+            onStatChange={this.assignStats}
+            placeholder="Intelligence"
+          />
+          <StatFormField
+            data-category="stat"
+            onStatChange={this.assignStats}
+            placeholder="Wisdom"
+          />
+          <StatFormField
+            data-category="stat"
+            onStatChange={this.assignStats}
+            placeholder="Charisma"
+          />
+        </div>
+        <div className="container container--profs">
+          <label>Proficiencies</label>
           <ProficiencyFormField
             classProfs={this.state.class.prof_skills}
             playerClass={this.state.class}
             onProfChange={this.assignProficiencies}
             proficiencies={this.state.proficiencies}
           />
-          <div className="stats--container">
-            <StatFormField
-              data-category="stat"
-              onStatChange={this.assignStats}
-              placeholder="Strength"
-            />
-            <StatFormField
-              data-category="stat"
-              onStatChange={this.assignStats}
-              placeholder="Dexterity"
-            />
-            <StatFormField
-              data-category="stat"
-              onStatChange={this.assignStats}
-              placeholder="Constitution"
-            />
-            <StatFormField
-              data-category="stat"
-              onStatChange={this.assignStats}
-              placeholder="Intelligence"
-            />
-            <StatFormField
-              data-category="stat"
-              onStatChange={this.assignStats}
-              placeholder="Wisdom"
-            />
-            <StatFormField
-              data-category="stat"
-              onStatChange={this.assignStats}
-              placeholder="Charisma"
-            />
-          </div>
         </div>
-
-        <BackgroundFormField
-          playerBackground={this.state.background}
-          onBackgroundChange={this.handleBackgroundChange}
-        />
-        <select data-category="alignment" name="alignment" onChange={this.formFieldHandler}>
-          <option value="lawfulGood">Lawful Good</option>
-          <option value="neutralGood">Neutral Good</option>
-          <option value="chaoticGood">Chaotic Good</option>
-          <option value="lawfulNeutral">Lawful Neutral</option>
-          <option value="neutral">Neutral</option>
-          <option value="chaoticNeutral">Chaotic Neutral</option>
-          <option value="lawfulEvil">Lawful Evil</option>
-          <option value="neutralEvil">Neutral Evil</option>
-          <option value="chaoticEvil">Chaotic Evil</option>
-        </select>
-        <TextComponent text={this.state.about} onTextChange={this.handleAboutChange} />
-        <input type="submit" value={"Create " + this.state.name} onClick={this.sendForm}></input>
+        <div className="container container--background">
+          <BackgroundFormField
+            playerBackground={this.state.background}
+            onBackgroundChange={this.handleBackgroundChange}
+          />
+        </div>
+        <div className="container container--alignment">
+          <select data-category="alignment" name="alignment" onChange={this.formFieldHandler}>
+            <option value="lawfulGood">Lawful Good</option>
+            <option value="neutralGood">Neutral Good</option>
+            <option value="chaoticGood">Chaotic Good</option>
+            <option value="lawfulNeutral">Lawful Neutral</option>
+            <option value="neutral">Neutral</option>
+            <option value="chaoticNeutral">Chaotic Neutral</option>
+            <option value="lawfulEvil">Lawful Evil</option>
+            <option value="neutralEvil">Neutral Evil</option>
+            <option value="chaoticEvil">Chaotic Evil</option>
+          </select>
+        </div>
+        <div className="container container--about">
+          <label>{"About " + this.state.name}</label>
+          <TextComponent text={this.state.about} onTextChange={this.handleAboutChange} />
+        </div>
+        <input
+          type="submit"
+          className="btn btn-primary btn-lg btn-block"
+          value={"Create " + this.state.name}
+          onClick={this.sendForm}
+        ></input>
       </div>
     );
   }
