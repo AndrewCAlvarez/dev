@@ -5,9 +5,13 @@ const router = express.Router();
 
 const playerCharacter = require("../../models/playerCharacterSchema");
 
-//GET playerCharacter from db
+//  GET playerCharacter from db
 router.get("/playerCharacter", (req, res) => {
-  res.send("Torvan the Conqueror!");
+  console.log(req.body);
+  playerCharacter.find({ name: "Reya" }, function(err, characters) {
+    if (err) console.error(err);
+    res.send(req.body);
+  });
 });
 
 //  CREATE post new playerCharacter to db

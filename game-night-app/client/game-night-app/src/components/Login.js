@@ -7,17 +7,28 @@ class Login extends React.Component {
 
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      uPlaceholder: "username",
+      pPlaceholder: "password"
     };
   }
 
   render() {
     return (
-      <div>
-        <label>Username</label>
-        <input type="text" placeholder="username"></input>
-        <label>Password</label>
-        <input type="text" placeholder="password"></input>
+      <div className="container--login">
+        <div>
+          <div>
+            <label>Username</label>
+            <input type="text" name="username" placeholder={this.state.uPlaceholder}></input>
+          </div>
+          <div>
+            <label>Password</label>
+            <input type="text" placeholder={this.state.pPlaceholder}></input>
+          </div>
+          <button className="btn--login" type="submit">
+            Login
+          </button>
+        </div>
       </div>
     );
   }

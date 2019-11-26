@@ -1,10 +1,32 @@
+.container--login {
+  width: 100vw;
+  height: 75vh;
+  border: 1px solid pink;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+
+  div {
+    margin-top: 5px;
+  }
+}
+
 label {
-  width: 50%;
+  padding-right: 10px;
 }
 
 input {
   text-align: center;
-
   border: none;
   border-bottom: 1px solid salmon;
+}
+
+.btn--login {
+  background-color: pink;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
 }
