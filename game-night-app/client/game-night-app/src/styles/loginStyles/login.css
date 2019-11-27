@@ -1,7 +1,7 @@
 .container--login {
   width: 100vw;
   height: 75vh;
-  border: 1px solid pink;
+  border: 1px solid #eb6864;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -29,11 +29,15 @@ label {
 input {
   text-align: center;
   border: none;
-  border-bottom: 1px solid salmon;
+  border-bottom: 1px solid #eb6864;
+}
+
+input:focus {
+  outline: none;
 }
 
 .btn--login {
-  background-color: pink;
+  background-color: #eb6864;
   width: 100%;
   border: none;
   border-radius: 5px;
