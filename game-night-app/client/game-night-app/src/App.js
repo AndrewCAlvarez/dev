@@ -16,7 +16,7 @@ class App extends React.Component {
 
     this.state = {
       loggedIn: true, //change this when working on user accounts
-      currentPage: ""
+      currentPage: "characterSelect"
     };
 
     this.handleLogin = this.handleLogin.bind(this);
