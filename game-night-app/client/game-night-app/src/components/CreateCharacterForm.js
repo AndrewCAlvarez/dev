@@ -3,10 +3,9 @@ import StatFormField from "./StatFormField";
 import ProficiencyFormField from "./ProficiencyFormField";
 import BackgroundFormField from "./BackgroundFormField";
 import TextComponent from "./TextComponent";
-import loadingGif from "../loading.gif";
-import bootstrap from "../bootstrap.min.css";
-import CreateCharacterFormStyles from "./../styles/createCharacterFormStyles/createCharacterForm.css";
-const axios = require("axios");
+import "../bootstrap.min.css";
+import "./../styles/createCharacterFormStyles/createCharacterForm.css";
+import axios from "axios";
 
 class CreateCharacterForm extends React.Component {
   constructor(props) {

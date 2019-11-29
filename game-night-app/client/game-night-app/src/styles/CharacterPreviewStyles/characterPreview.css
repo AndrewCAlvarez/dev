@@ -1,0 +1,11 @@
+img {
+  width: 10%;
+  height: auto;
+  margin-left: 2%;
+}
+
+.characterPreview--container {
+  padding: 5px;
+  border-bottom: 1px solid black;
+}
+/*# sourceMappingURL=characterPreview.css.map */

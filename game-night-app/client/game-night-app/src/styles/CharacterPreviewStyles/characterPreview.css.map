@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,GAAG,CAAC;EACF,KAAK,EAAE,GAAG;EACV,MAAM,EAAE,IAAI;EACZ,WAAW,EAAE,EAAE;CAChB;;AAED,AAAA,4BAA4B,CAAC;EAC3B,OAAO,EAAE,GAAG;EACZ,aAAa,EAAE,eAAe;CAC/B",
+    "sources": [
+        "characterPreview.scss"
+    ],
+    "names": [],
+    "file": "characterPreview.css"
+}

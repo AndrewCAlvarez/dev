@@ -18,7 +18,7 @@ passport.use(
         return done(null, false);
       }
       //  verifyPassword is a method that should be added to the schema later
-      //currently setup in userSchema.js and always returns true
+      //  currently setup in userSchema.js and always returns true
       if (user.password != password) {
         console.log("Incorrect password.");
         return done(null, false, { message: "Incorrect password" });
@@ -39,19 +39,26 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
-router.get("/user", (req, res) => {
-  User.find(function(err, users) {
-    if (err) console.error(err);
-    //  req.session holds the user id for the session while logged in
-    res.send(req.session);
-  });
+router.get("/sessionID", (req, res) => {
+  console.log(req.session.id);
+  res.send(req.session.id);
+});
+
+router.get("/loginSuccess", (req, res) => {
+  console.log(req.user);
+  res.sendStatus(200);
+});
+
+router.get("/loginFailure", (req, res) => {
+  res.sendStatus(401);
 });
 
 //  Login as existing user
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/user"
+    successRedirect: "/loginSuccess",
+    failureRedirect: "/loginFailure"
   })
 );
 

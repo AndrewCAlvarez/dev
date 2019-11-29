@@ -1,42 +1,93 @@
 import React from "react";
+// import axios from "axios";
 // import PlayerCharacter from "./components/PlayerCharacter.js";
 // import Form from "./components/FormComponent";
 import CreateCharacterForm from "./components/CreateCharacterForm";
 import Login from "./components/LoginComponent";
 import Navbar from "./components/Navbar";
+import CharacterSelect from "./components/CharacterSelectComponent";
+import Signup from "./components/SignUpComponent copy";
+
 import "./App.css";
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this.state = {
-      userId: null
+      loggedIn: true, //change this when working on user accounts
+      currentPage: ""
     };
 
-    this.state.handleUserIdChange = this.handleUserIdChange.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
-  handleUserIdChange(userId) {
+  handleLogin(loggedIn) {
     this.setState({
-      userId: userId
+      loggedIn: loggedIn
+    });
+  }
+
+  handlePageTransition(e) {
+    this.setState({
+      currentPage: e.target.name
     });
   }
 
   render() {
-    if (this.state.userId === null) {
+    let currentPage = this.state.currentPage;
+
+    if (this.state.loggedIn === false) {
       return (
         <div className="App">
           <Navbar />
-          <Login onUpdateId={(userId) => this.handleUserIdChange(userId)} />
+          <Login onLoginSuccess={this.handleLogin} newMember={this.handleSignup} />
         </div>
       );
-    } else {
+    } else if (currentPage === "") {
       return (
         <div className="App">
           <Navbar />
-
+          <button name="login" onClick={(e) => this.handlePageTransition(e)}>
+            Login
+          </button>
+          <button name="signup" onClick={(e) => this.handlePageTransition(e)}>
+            Signup
+          </button>
+          <button name="characterCreation" onClick={(e) => this.handlePageTransition(e)}>
+            Create New Character
+          </button>
+          <button name="characterSelect" onClick={(e) => this.handlePageTransition(e)}>
+            Select Character
+          </button>
+        </div>
+      );
+    } else if (currentPage === "characterCreation") {
+      return (
+        <div>
+          <Navbar />
           <CreateCharacterForm />
+        </div>
+      );
+    } else if (currentPage === "login") {
+      return (
+        <div>
+          <Navbar />
+          <Login />
+        </div>
+      );
+    } else if (currentPage === "signup") {
+      return (
+        <div>
+          <Navbar />
+          <Signup />
+        </div>
+      );
+    } else if (currentPage === "characterSelect") {
+      return (
+        <div>
+          <Navbar />
+          <CharacterSelect />
         </div>
       );
     }

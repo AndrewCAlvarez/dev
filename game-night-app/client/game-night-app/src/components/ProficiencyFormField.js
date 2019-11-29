@@ -2,10 +2,6 @@ import React from "react";
 import loadingGif from "./loading.gif";
 
 class ProficiencyFormField extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   searchStr(str, skillsArray, playerClass) {
     let availableSkillsArr = [];
     skillsArray.forEach((element, index) => {

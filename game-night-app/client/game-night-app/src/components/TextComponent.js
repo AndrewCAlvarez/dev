@@ -1,10 +1,6 @@
 import React from "react";
 
 class TextComponent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleChange(e) {
     this.props.onTextChange(e.target.value);
   }

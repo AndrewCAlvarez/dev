@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import "./../styles/loginStyles/login.css";
 
-class Login extends React.Component {
+class Signup extends React.Component {
   constructor(props) {
     super(props);
 
@@ -73,10 +73,7 @@ class Login extends React.Component {
             ></input>
           </div>
           <button className="btn--login" type="submit" onClick={this.handleLogin}>
-            Login
-          </button>
-          <button className="btn--login" type="submit" onClick={this.handleSignup}>
-            New member? Sign up!
+            Create Account
           </button>
         </div>
       </div>
@@ -84,4 +81,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default Signup;

@@ -4,7 +4,6 @@ $red: #eb6864;
 .container--login {
   width: 100vw;
   height: 75vh;
-  border: 1px solid $red;
 
   display: flex;
   flex-direction: column;
@@ -32,6 +31,9 @@ input {
 }
 
 .btn--login {
+  padding: 5px;
+  margin-bottom: 5px;
+  color: white;
   background-color: $red;
   width: 100%;
   border: none;
