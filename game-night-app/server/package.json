@@ -1,0 +1,25 @@
+{
+  "name": "game-night-app",
+  "version": "1.0.0",
+  "description": "App for tabletop rpgs",
+  "main": "server.js",
+  "scripts": {
+    "server": "node server.js"
+  },
+  "author": "Andrew Alvarez",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.0",
+    "mongoose": "^5.7.7",
+    "nodemon": "^1.19.4",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "uuid": "^3.3.3",
+    "xml2js": "^0.4.22"
+  }
+}

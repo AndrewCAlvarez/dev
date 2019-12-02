@@ -1,4 +1,4 @@
-.container--login {
+.container--signin {
   width: 100vw;
   height: 75vh;
   display: -webkit-box;
@@ -17,7 +17,7 @@
       align-content: center;
 }
 
-.container--login div {
+.container--signin div {
   margin-top: 5px;
 }
 
@@ -35,7 +35,7 @@ input:focus {
   outline: none;
 }
 
-.btn--login {
+.btn--signin {
   padding: 5px;
   margin-bottom: 5px;
   color: white;
