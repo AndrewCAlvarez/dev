@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-function Signup() {
+function Signup(props) {
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -13,6 +13,7 @@ function Signup() {
       })
       .then(function(response) {
         console.log(response);
+        props.userLoggedIn(true);
       })
       .catch(function(error) {
         console.log(error);
@@ -56,7 +57,9 @@ function Signup() {
           placeholder="Password"
         ></input>
       </div>
-      <input type="submit" className="btn btn-primary"></input>
+      <button type="submit" className="btn btn-primary">
+        Sign up!
+      </button>
     </form>
   );
 }

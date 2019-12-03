@@ -3,84 +3,34 @@ const session = require("express-session");
 const router = express.Router();
 const bodyParser = require("body-parser");
 const uuid = require("uuid");
-
 const User = require("../../models/userSchema");
-
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
-router.use(passport.initialize());
+//  Passport config
+require("./../../config/passport")(passport);
 
+router.use(bodyParser.urlencoded({ extended: false }));
 router.use(
   session({
-    genid: (req) => {
-      console.log("Inside the session middleware");
-      console.log(req.sessionID);
-      return uuid(); // use UUIDs for session IDs
-    },
+    // genid: function(req) {
+    //   console.log(`GENERATE UUID...\n${req.session}`);
+    //   return uuid(); // use UUIDs for session IDs
+    // },
     secret: "keyboard cat",
-    resave: false,
+    resave: true,
     saveUninitialized: true
   })
 );
 
-passport.use(
-  new LocalStrategy(function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
-      if (err) {
-        return done(err);
-      }
-      if (!user) {
-        console.log("Incorrect user.");
-        return done(null, false);
-      }
-      //  verifyPassword is a method that should be added to the schema later
-      //  currently setup in userSchema.js and always returns true
-      if (user.password != password) {
-        console.log("Incorrect password.");
-        return done(null, false, { message: "Incorrect password" });
-      }
-      return done(null, user);
-    });
-  })
-);
+//  Passport middleware
+router.use(passport.initialize());
+router.use(passport.session());
 
-//  serialize is used in sessions to allow users to get data again without using creds
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
-
-router.get("/signinSuccess", (req, res) => {
-  console.log("Inside the homepage callback function");
-  console.log(req.sessionID);
+router.post("/signin", passport.authenticate("local"), function(req, res) {
+  // If this function gets called, authentication was successful.
+  // `req.user` contains the authenticated user.
   res.sendStatus(200);
-});
-
-router.get("/signinFailure", (req, res) => {
-  res.sendStatus(401);
-});
-
-//  Signin as existing user
-router.post("/signin", (req, res, next) => {
-  console.log("Inside POST /login callback");
-
-  passport.authenticate("local", (err, user, info) => {
-    console.log("Inside passport.authenticate() callback");
-    console.log(`req.session.passport: ${JSON.stringify(req.session.passport)}`);
-    console.log(`req.user: ${JSON.stringify(req.user)}`);
-    req.login(user, (err) => {
-      console.log("Inside req.login() callback");
-      console.log(`req.session.passport: ${JSON.stringify(req.session.passport)}`);
-      console.log(`req.user: ${JSON.stringify(req.user)}`);
-      return res.send("You were authenticated & logged in!\n");
-    });
-  })(req, res, next);
 });
 
 //  Create new user
@@ -106,14 +56,18 @@ router.post("/signup", (req, res) => {
   });
 });
 
-router.get("/authrequired", (req, res) => {
-  console.log("Inside GET /authrequired callback");
-  console.log(`User authenticated? ${req.isAuthenticated()}`);
+router.get("/loggedIn", (req, res) => {
   if (req.isAuthenticated()) {
-    res.send("you hit the authentication endpoint\n");
+    res.sendStatus(200);
   } else {
-    res.redirect("/");
+    res.sendStatus(401);
   }
+});
+
+router.get("/logout", (req, res) => {
+  console.log("response");
+  req.logout();
+  res.sendStatus(200);
 });
 
 module.exports = router;

@@ -1,21 +1,52 @@
 import React from "react";
 import axios from "axios";
-import "./../styles/loginStyles/login.css";
 
-function Login(props) {
+function Signin(props) {
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    axios
+      .post("http://localhost:9000/signin", {
+        username: e.target.username.value,
+        password: e.target.password.value
+      })
+      .then(function(response) {
+        console.log(response);
+        props.userLoggedIn(true);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }
+
   return (
-    <form className="container--signin">
-      <label>Name</label>
-      <input placeholder="Name"></input>
-      <label>Email</label>
-      <input placeholder="Email"></input>
-      <label>Password</label>
-      <input placeholder="password"></input>
-      <button className="btn--signin" type="submit">
-        Sign In
+    <form onSubmit={handleSubmit}>
+      <div className="form-group container--signin">
+        <label>Username</label>
+        <input
+          name="username"
+          type="text"
+          className="form-control"
+          id="inputUsername"
+          aria-describedby="usernameHelp"
+          placeholder="Enter username"
+        ></input>
+      </div>
+      <div className="form-group">
+        <label htmlFor="inputPassword">Password</label>
+        <input
+          name="password"
+          type="password"
+          className="form-control"
+          id="inputPassword"
+          placeholder="Password"
+        ></input>
+      </div>
+      <button type="submit" className="btn btn-primary">
+        Sign in
       </button>
     </form>
   );
 }
 
-export default Login;
+export default Signin;

@@ -1,93 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import CreateCharacterForm from "./components/CreateCharacterForm";
 import Signin from "./components/Signin";
 import Navbar from "./components/Navbar";
 import CharacterSelect from "./components/CharacterSelectComponent";
-import Signup from "./components/SignUpComponent";
+import Signup from "./components/Signup";
 import CharacterSheet from "./components/CharacterSheetComponent";
 import Welcome from "./components/Welcome";
 
 import "./App.css";
+import Axios from "axios";
 
-class App extends React.Component {
-  constructor() {
-    super();
+function App() {
+  const [loggedin, setLoggedIn] = useState(false);
 
-    this.state = {
-      loggedIn: true, //change this when working on user accounts
-      currentPage: "signup"
-    };
-
-    this.handleLogin = this.handleLogin.bind(this);
-    this.handleNavigation = this.handleNavigation.bind(this);
+  function handleLogin(loggedIn) {
+    setLoggedIn(loggedIn);
   }
 
-  handleLogin(loggedIn) {
-    this.setState({
-      loggedIn: loggedIn
-    });
-  }
-
-  handlePageTransition(e) {
-    this.setState({
-      currentPage: e.target.name
-    });
-  }
-
-  handleNavigation(page) {
-    this.setState({
-      currentPage: ""
-    });
-  }
-
-  render() {
-    let currentPage = this.state.currentPage;
-
-    if (this.state.loggedIn === false) {
-      return (
-        <div className="App">
-          <Navbar />
-          <Signin onLoginSuccess={this.handleLogin} newMember={this.handleSignup} />
-        </div>
-      );
-    } else if (currentPage === "welcome") {
-      return (
-        <div className="App">
-          <Navbar />
-          <Welcome />
-        </div>
-      );
-    } else if (currentPage === "characterCreation") {
-      return (
-        <div>
-          <Navbar onNavigate={this.handleNavigation} />
-          <CreateCharacterForm />
-        </div>
-      );
-    } else if (currentPage === "signin") {
-      return (
-        <div>
-          <Navbar onNavigate={this.handleNavigation} />
-          <Signin />
-        </div>
-      );
-    } else if (currentPage === "signup") {
-      return (
-        <div>
-          <Navbar onNavigate={this.handleNavigation} />
-          <Signup />
-        </div>
-      );
-    } else if (currentPage === "characterSelect") {
-      return (
-        <div>
-          <Navbar onNavigate={this.handleNavigation} />
-          {/* <CharacterSelect /> */}
-          {/* <Counter /> */}
-          <CharacterSheet />
-        </div>
-      );
-    }
+  if (!loggedin) {
+    return (
+      <div>
+        <Welcome userLoggedIn={handleLogin} />
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <CharacterSelect />
+      </div>
+    );
   }
 }
 
