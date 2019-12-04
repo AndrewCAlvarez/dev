@@ -2,10 +2,8 @@ const express = require("express");
 const session = require("express-session");
 const router = express.Router();
 const bodyParser = require("body-parser");
-const uuid = require("uuid");
 const User = require("../../models/userSchema");
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
 
 //  Passport config
 require("./../../config/passport")(passport);
@@ -30,6 +28,8 @@ router.use(passport.session());
 router.post("/signin", passport.authenticate("local"), function(req, res) {
   // If this function gets called, authentication was successful.
   // `req.user` contains the authenticated user.
+  console.log(req.session.id);
+
   res.sendStatus(200);
 });
 
@@ -57,15 +57,11 @@ router.post("/signup", (req, res) => {
 });
 
 router.get("/loggedIn", (req, res) => {
-  if (req.isAuthenticated()) {
-    res.sendStatus(200);
-  } else {
-    res.sendStatus(401);
-  }
+  if (req.isAuthenticated()) res.sendStatus(200);
+  else res.sendStatus(401);
 });
 
 router.get("/logout", (req, res) => {
-  console.log("response");
   req.logout();
   res.sendStatus(200);
 });

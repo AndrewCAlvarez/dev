@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Signin from "./Signin";
 import Signup from "./Signup";
+import axios from "axios";
 
 import "./../bootstrap.min.css";
 
@@ -9,13 +10,11 @@ function Welcome(props) {
   const [loggedIn, setLoggedIn] = useState(false);
 
   function registerNewUser() {
-    console.log(registerUser);
     setRegisterUser(!registerUser);
   }
 
-  function handleLogin(loggedIn) {
-    console.log(loggedIn);
-    props.userLoggedIn(loggedIn);
+  function handleLogin() {
+    props.handleLogin();
   }
 
   if (!registerUser) {
@@ -23,7 +22,7 @@ function Welcome(props) {
       <div>
         <h1>Welcome</h1>
         <p>Please sign in or register new user.</p>
-        <Signin userLoggedIn={handleLogin} />
+        <Signin handleLogin={handleLogin} />
         <button className="btn btn-secondary" onClick={registerNewUser}>
           Register
         </button>

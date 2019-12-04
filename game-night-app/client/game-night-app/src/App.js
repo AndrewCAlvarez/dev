@@ -1,33 +1,39 @@
 import React, { useState } from "react";
 import axios from "axios";
-import CreateCharacterForm from "./components/CreateCharacterForm";
+import CreateCharacterForm from "./components/CreateCharacter";
 import Signin from "./components/Signin";
 import Navbar from "./components/Navbar";
-import CharacterSelect from "./components/CharacterSelectComponent";
 import Signup from "./components/Signup";
 import CharacterSheet from "./components/CharacterSheetComponent";
 import Welcome from "./components/Welcome";
-
+import Dashboard from "./components/Dashboard";
 import "./App.css";
-import Axios from "axios";
 
 function App() {
-  const [loggedin, setLoggedIn] = useState(false);
+  const [loggedIn, setloggedIn] = useState(false);
 
-  function handleLogin(loggedIn) {
-    setLoggedIn(loggedIn);
+  function checkLoginStatus() {
+    axios.get("http://localhost:9000/loggedIn", { withCredentials: true }).then((response) => {
+      response.status === 200 ? setloggedIn(true) : setloggedIn(false);
+    });
+    console.log(`Logged in ? ${loggedIn}`);
   }
 
-  if (!loggedin) {
+  checkLoginStatus();
+
+  if (!loggedIn) {
     return (
       <div>
-        <Welcome userLoggedIn={handleLogin} />
+        <Navbar loggedIn={loggedIn} handleLogin={checkLoginStatus} />
+        <Welcome handleLogin={checkLoginStatus} />
       </div>
     );
   } else {
     return (
       <div>
-        <CharacterSelect />
+        <Navbar loggedIn={loggedIn} handleLogin={checkLoginStatus} />
+        {/* <Dashboard /> */}
+        <CreateCharacterForm />
       </div>
     );
   }

@@ -48,16 +48,20 @@ class CreateCharacterForm extends React.Component {
       window.alert("Please enter a name.");
     } else {
       axios
-        .post("http://localhost:9000/playerCharacter", {
-          name: this.state.name,
-          class: this.state.class,
-          race: this.state.race,
-          proficiencies: this.state.proficiencies,
-          stats: this.state.stats,
-          background: this.state.background,
-          alignment: this.state.alignment,
-          about: this.state.about
-        })
+        .post(
+          "http://localhost:9000/playerCharacter",
+          { withCredentials: true },
+          {
+            name: this.state.name,
+            class: this.state.class,
+            race: this.state.race,
+            proficiencies: this.state.proficiencies,
+            stats: this.state.stats,
+            background: this.state.background,
+            alignment: this.state.alignment,
+            about: this.state.about
+          }
+        )
         .then(function(response) {
           console.log(response);
         })

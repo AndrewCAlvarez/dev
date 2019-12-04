@@ -13,7 +13,6 @@ function Signup(props) {
       })
       .then(function(response) {
         console.log(response);
-        props.userLoggedIn(true);
       })
       .catch(function(error) {
         console.log(error);

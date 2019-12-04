@@ -4,14 +4,9 @@ import "./../styles/CharacterPreviewStyles/characterPreview.css";
 import portrait from "./../marcenoPortrait.jpg";
 
 function CharacterPreview() {
-  function checkAuth() {
-    axios.get("http://localhost:9000/logout").then((response) => {
-      console.log(`Authorized ? ${response}`);
-    });
-  }
   return (
     <div>
-      <div className="characterPreview--container" onClick={checkAuth}>
+      <div className="characterPreview--container">
         <img src={portrait} alt="character portrait" />
         <label name="charactername">Marceno</label>
         <label name="characterLevel">Level 5</label>

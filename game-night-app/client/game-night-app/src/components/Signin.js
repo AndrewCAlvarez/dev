@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 
 function Signin(props) {
+  axios.defaults.withCredentials = true; // send cookies with requests
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -12,7 +14,7 @@ function Signin(props) {
       })
       .then(function(response) {
         console.log(response);
-        props.userLoggedIn(true);
+        props.handleLogin();
       })
       .catch(function(error) {
         console.log(error);
