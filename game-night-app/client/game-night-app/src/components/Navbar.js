@@ -2,12 +2,10 @@ import React from "react";
 import axios from "axios";
 
 function Navbar(props) {
-  axios.defaults.withCredentials = true; // set global credentials
-
   function logout() {
     //  IMPORTANT!! Axios does not send cookies by default (cookies contain session)
     //  Must include {withCredentials: true} to send cookie
-    axios.get("http://localhost:9000/logout").then((response) => {
+    axios.get("http://localhost:9000/logout", { withCredentials: true }).then((response) => {
       props.handleLogin();
     });
   }

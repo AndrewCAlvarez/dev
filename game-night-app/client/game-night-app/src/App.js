@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import CreateCharacterForm from "./components/CreateCharacter";
+import CreateCharacter from "./components/CreateCharacter";
 import Signin from "./components/Signin";
 import Navbar from "./components/Navbar";
 import Signup from "./components/Signup";
@@ -10,13 +10,12 @@ import Dashboard from "./components/Dashboard";
 import "./App.css";
 
 function App() {
-  const [loggedIn, setloggedIn] = useState(false);
+  const [loggedIn, setloggedIn] = useState(true);
 
   function checkLoginStatus() {
     axios.get("http://localhost:9000/loggedIn", { withCredentials: true }).then((response) => {
       response.status === 200 ? setloggedIn(true) : setloggedIn(false);
     });
-    console.log(`Logged in ? ${loggedIn}`);
   }
 
   checkLoginStatus();
@@ -33,7 +32,7 @@ function App() {
       <div>
         <Navbar loggedIn={loggedIn} handleLogin={checkLoginStatus} />
         {/* <Dashboard /> */}
-        <CreateCharacterForm />
+        <CreateCharacter />
       </div>
     );
   }
