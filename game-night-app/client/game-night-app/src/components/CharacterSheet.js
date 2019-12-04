@@ -7,15 +7,20 @@ function CharacterSheet() {
   const [character, setCharacter] = useState("");
 
   function handleCharacterChange() {
-    axios.get("http://localhost:9000/playerCharacter").then((response) => {
-      console.log(response);
-      setCharacter(response.data[0]);
-    });
+    axios
+      .get("http://localhost:9000/playerCharacter", { withCredentials: true })
+      .then((response) => {
+        console.log(response);
+        setCharacter(response.data[0]);
+      });
   }
 
   if (character === "") {
-    handleCharacterChange();
-    return <img src={loading} />;
+    return (
+      <button className="btn btn-primary btn-lg btn-block" onClick={handleCharacterChange}>
+        GET CHARACTER
+      </button>
+    );
   } else {
     return (
       <div>

@@ -2,16 +2,18 @@ import React from "react";
 import axios from "axios";
 
 function Signin(props) {
-  axios.defaults.withCredentials = true; // send cookies with requests
-
   function handleSubmit(e) {
     e.preventDefault();
 
     axios
-      .post("http://localhost:9000/signin", {
-        username: e.target.username.value,
-        password: e.target.password.value
-      })
+      .post(
+        "http://localhost:9000/signin",
+        {
+          username: e.target.username.value,
+          password: e.target.password.value
+        },
+        { withCredentials: true }
+      )
       .then(function(response) {
         console.log(response);
         props.handleLogin();

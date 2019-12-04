@@ -18,6 +18,9 @@ const userSchema = new mongoose.Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  character_id: {
+    type: Array
   }
 });
 

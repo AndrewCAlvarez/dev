@@ -4,17 +4,17 @@ import CreateCharacter from "./components/CreateCharacter";
 import Signin from "./components/Signin";
 import Navbar from "./components/Navbar";
 import Signup from "./components/Signup";
-import CharacterSheet from "./components/CharacterSheetComponent";
+import CharacterSheet from "./components/CharacterSheet";
 import Welcome from "./components/Welcome";
 import Dashboard from "./components/Dashboard";
 import "./App.css";
 
 function App() {
-  const [loggedIn, setloggedIn] = useState(true);
+  const [loggedIn, setloggedIn] = useState(false);
 
   function checkLoginStatus() {
     axios.get("http://localhost:9000/loggedIn", { withCredentials: true }).then((response) => {
-      response.status === 200 ? setloggedIn(true) : setloggedIn(false);
+      response.data === "LOGGED_IN" ? setloggedIn(true) : setloggedIn(false);
     });
   }
 
@@ -33,6 +33,7 @@ function App() {
         <Navbar loggedIn={loggedIn} handleLogin={checkLoginStatus} />
         {/* <Dashboard /> */}
         <CreateCharacter />
+        <CharacterSheet />
       </div>
     );
   }

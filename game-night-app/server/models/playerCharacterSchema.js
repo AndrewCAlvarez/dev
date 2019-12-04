@@ -9,7 +9,8 @@ const playerCharacterSchema = new mongoose.Schema({
   stats: {},
   background: {},
   alignment: String,
-  about: String
+  about: String,
+  user_id: Array
   //   spells: {},
   //   items: {}
 });

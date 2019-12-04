@@ -57,8 +57,8 @@ router.post("/signup", (req, res) => {
 });
 
 router.get("/loggedIn", (req, res) => {
-  if (req.isAuthenticated()) res.sendStatus(200);
-  else res.sendStatus(401);
+  if (req.isAuthenticated()) res.send("LOGGED_IN");
+  else res.send("NOT_AUTHORIZED");
 });
 
 router.get("/logout", (req, res) => {
