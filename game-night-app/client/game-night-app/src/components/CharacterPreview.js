@@ -3,15 +3,17 @@ import axios from "axios";
 import "./../styles/CharacterPreviewStyles/characterPreview.css";
 import portrait from "./../marcenoPortrait.jpg";
 
-function CharacterPreview() {
+function CharacterPreview(props) {
+  function handleCharacterSelected() {
+    props.handleCharacterSelected(props.index);
+  }
   return (
-    <div>
+    <div onClick={handleCharacterSelected}>
       <div className="characterPreview--container">
         <img src={portrait} alt="character portrait" />
-        <label name="charactername">Marceno</label>
-        <label name="characterLevel">Level 5</label>
-        <label name="characterRace">Human</label>
-        <label name="characterClass">Fighter</label>
+        <label name="charactername">{props.characters.name}</label>
+        <label name="characterRace">{props.characters.race.name}</label>
+        <label name="characterClass">{props.characters.class.name}</label>
       </div>
     </div>
   );

@@ -49,7 +49,7 @@ class CreateCharacterForm extends React.Component {
     } else {
       axios
         .post(
-          "http://localhost:9000/playerCharacter",
+          "http://192.168.1.131:9000/playerCharacter",
           {
             name: this.state.name,
             class: this.state.class,
@@ -69,6 +69,8 @@ class CreateCharacterForm extends React.Component {
           console.log(error);
         });
       event.preventDefault();
+      this.props.handleCharacterChange();
+      this.props.handleCreateCharacter();
       console.log("FORM SENT");
     }
   }

@@ -29,7 +29,7 @@ router.post("/signin", passport.authenticate("local"), function(req, res) {
   // If this function gets called, authentication was successful.
   // `req.user` contains the authenticated user.
   console.log(req.session.id);
-
+  console.log("SIGNIN");
   res.sendStatus(200);
 });
 

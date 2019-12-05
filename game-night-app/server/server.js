@@ -7,9 +7,9 @@ const port = 9000;
 
 //  cors config
 //  accept cookies (credentials) and specify where to accept them from (origin)
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cors({ credentials: true, origin: "http://192.168.1.131:3000" }));
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "http://192.168.1.131:3000"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
@@ -23,12 +23,12 @@ app.use("/", routes);
 //  Connect to MongoDB
 const keys = require("./config/keys");
 
-mongoose.connect(keys.mongoURI);
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true, useUnifiedTopology: true });
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", function() {
   //    we're connected!
-  console.log("\n\nMongoDB connected!\n\n");
+  console.log("MongoDB connected!\n\n");
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}!`));

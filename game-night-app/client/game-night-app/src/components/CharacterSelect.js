@@ -1,14 +1,28 @@
 import React from "react";
 import CharacterPreview from "./CharacterPreview";
 import axios from "axios";
-function CharacterSelect() {
+function CharacterSelect(props) {
+  function handleCharacterSelected(e) {
+    props.handleCharacterSelected(e);
+  }
+
+  let characterArray = [];
+  {
+    props.characters.forEach((element, index) => {
+      characterArray.push(
+        <CharacterPreview
+          key={index}
+          index={index}
+          handleCharacterSelected={handleCharacterSelected}
+          characters={element}
+        />
+      );
+    });
+  }
   return (
     <div>
-      <CharacterPreview />
-      <CharacterPreview />
-      <CharacterPreview />
-      <CharacterPreview />
-      <CharacterPreview />
+      {characterArray}
+      {/* <CharacterPreview characters={props.characters} /> */}
     </div>
   );
 }
