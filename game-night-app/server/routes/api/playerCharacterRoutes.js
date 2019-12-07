@@ -1,6 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const axios = require("axios");
 const router = express.Router();
 const passport = require("passport");
 const bodyParser = require("body-parser");
