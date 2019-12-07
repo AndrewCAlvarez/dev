@@ -13,9 +13,11 @@ function App() {
   const [loggedIn, setloggedIn] = useState(false);
 
   function checkLoginStatus() {
-    axios.get("http://192.168.1.131:9000/loggedIn", { withCredentials: true }).then((response) => {
-      response.data === "LOGGED_IN" ? setloggedIn(true) : setloggedIn(false);
-    });
+    axios
+      .get("http://134.209.163.182:9000/loggedIn", { withCredentials: true })
+      .then((response) => {
+        response.data === "LOGGED_IN" ? setloggedIn(true) : setloggedIn(false);
+      });
   }
 
   checkLoginStatus();
