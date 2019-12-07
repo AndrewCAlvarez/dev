@@ -46,7 +46,7 @@ function Signin(props) {
           placeholder="Password"
         ></input>
       </div>
-      <button type="submit" className="btn btn-primary">
+      <button onClick={handleSubmit} type="submit" className="btn btn-primary">
         Sign in
       </button>
     </form>
