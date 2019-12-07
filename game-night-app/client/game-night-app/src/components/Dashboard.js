@@ -13,7 +13,7 @@ function Dashboard() {
 
   function handleCharacterChange() {
     axios
-      .get("http://192.168.1.131:9000/playerCharacter", { withCredentials: true })
+      .get("http://134.209.163.182:9000/playerCharacter", { withCredentials: true })
       .then((response) => {
         response.data.length === 0 ? console.log("ZERO") : setCharacters(response.data);
       });

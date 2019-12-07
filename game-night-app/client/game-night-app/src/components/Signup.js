@@ -6,7 +6,7 @@ function Signup(props) {
     e.preventDefault();
 
     axios
-      .post("http://192.168.1.131:9000/signup", {
+      .post("http://134.209.163.182:9000/signup", {
         username: e.target.username.value,
         email: e.target.email.value,
         password: e.target.password.value
