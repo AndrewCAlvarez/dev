@@ -1,15 +1,19 @@
 const express = require("express");
+const path = require("path");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const app = express();
 const port = 9000;
+
+const app = express();
+
+app.use(express.static(path.join(__dirname, "./../client/game-night-app/build")));
 
 //  cors config
 //  accept cookies (credentials) and specify where to accept them from (origin)
-app.use(cors({ credentials: true, origin: "http://192.168.1.131:3000" }));
+app.use(cors({ credentials: true, origin: "http://localhost:9000" }));
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://192.168.1.131:3000"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "http://localhost:9000"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
@@ -30,6 +34,10 @@ db.once("open", function() {
   //    we're connected!
   console.log("MongoDB connected!\n\n");
 });
+
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname + "/client/game-night-app/build/index.html"));
+// });
 
 app.listen(port, () => console.log(`Listening on port ${port}!`));
 

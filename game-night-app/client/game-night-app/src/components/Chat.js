@@ -13,6 +13,7 @@ function Chat() {
 
   function handleSendMsg(e) {
     e.preventDefault();
+    setChat(sendMessage(message)); // I think this will work, but currently returning undef
     console.log(sendMessage(message));
   }
 
