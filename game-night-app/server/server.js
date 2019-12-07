@@ -11,9 +11,9 @@ const app = express();
 
 //  cors config
 //  accept cookies (credentials) and specify where to accept them from (origin)
-app.use(cors({ credentials: true, origin: "http://134.209.163.182:9000" }));
+app.use(cors({ credentials: true, origin: "http://134.209.163.182:8080" }));
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://134.209.163.182:9000"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Origin", "http://134.209.163.182:8080"); // update to match the domain you will make the request from
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
