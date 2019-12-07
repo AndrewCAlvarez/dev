@@ -25,17 +25,13 @@ router.use(
 router.use(passport.initialize());
 router.use(passport.session());
 
-router.post(
-  "/signin",
-  // passport.authenticate("local"),
-  function(req, res) {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-    console.log(req.session.id);
-    console.log("SIGNIN");
-    res.sendStatus(200);
-  }
-);
+router.post("/signin", passport.authenticate("local"), function(req, res) {
+  // If this function gets called, authentication was successful.
+  // `req.user` contains the authenticated user.
+  console.log(req.session.id);
+  console.log("SIGNIN");
+  res.sendStatus(200);
+});
 
 //  Create new user
 router.post("/signup", (req, res) => {
