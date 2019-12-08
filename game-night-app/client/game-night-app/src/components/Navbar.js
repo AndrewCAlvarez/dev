@@ -5,7 +5,7 @@ function Navbar(props) {
   function logout() {
     //  IMPORTANT!! Axios does not send cookies by default (cookies contain session)
     //  Must include {withCredentials: true} to send cookie
-    axios.get("http://134.209.163.182:9000/logout", { withCredentials: true }).then((response) => {
+    axios.get("http://gatorwebdev.com:9000/logout", { withCredentials: true }).then((response) => {
       props.handleLogin();
     });
   }

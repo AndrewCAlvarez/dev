@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { subscribeToTimer, sendMessage, subscribeToChat } from "./../api";
+// import { subscribeToTimer, sendMessage, subscribeToChat } from "./../api";
 
 function Chat() {
   const [timestamp, setTimestamp] = useState("no timestamp yet");

@@ -49,7 +49,7 @@ class CreateCharacterForm extends React.Component {
     } else {
       axios
         .post(
-          "http://134.209.163.182:9000/playerCharacter",
+          "http://gatorwebdev.com:9000/playerCharacter",
           {
             name: this.state.name,
             class: this.state.class,
