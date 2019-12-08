@@ -10,10 +10,6 @@ class PlayerCharacter extends React.Component {
   }
 
   callAPI() {
-    // fetch("http://localhost:9000")
-    //   .then((res) => res.text())
-    //   .then((res) => this.setState({ apiResponse: res }));
-
     //  The data is held in "data" with axios as opposed to body in fetch
     axios.get("https://api.open5e.com/spells/").then((response) => {
       this.setState({ spells: response.data.results });

@@ -6,7 +6,7 @@ function Signup(props) {
     e.preventDefault();
 
     axios
-      .post("http://gatorwebdev.com:9000/signup", {
+      .post("http://localhost:9000/signup", {
         username: e.target.username.value,
         email: e.target.email.value,
         password: e.target.password.value
