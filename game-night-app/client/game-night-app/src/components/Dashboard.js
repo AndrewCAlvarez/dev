@@ -13,7 +13,7 @@ function Dashboard() {
 
   function handleCharacterChange() {
     axios
-      .get("http://gatorwebdev.com:9000/playerCharacter", { withCredentials: true })
+      .get("http://localhost:9000/playerCharacter", { withCredentials: true })
       .then((response) => {
         response.data.length === 0 ? console.log("ZERO") : setCharacters(response.data);
       });
