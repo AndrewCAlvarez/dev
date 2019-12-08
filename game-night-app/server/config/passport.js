@@ -20,6 +20,7 @@ module.exports = function(passport) {
           console.log("Incorrect password.");
           return done(null, false);
         }
+        console.log("PASSPORT AUTHENTICATION SUCCESSFUL");
         return done(null, user);
       });
     })
