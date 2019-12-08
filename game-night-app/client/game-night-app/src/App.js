@@ -14,7 +14,7 @@ function App() {
 
   function checkLoginStatus() {
     axios
-      .get("http://134.209.163.182:9000/loggedIn", { withCredentials: true })
+      .get("http://gatorwebdev.com:9000/loggedIn", { withCredentials: true })
       .then((response) => {
         console.log(response);
         response.data === "LOGGED_IN" ? setloggedIn(true) : setloggedIn(false);
