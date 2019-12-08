@@ -35,5 +35,5 @@
   "devDependencies": {
     "redux-devtools": "^3.5.0"
   },
-  "proxy": "http://134.209.163.182:9000"
+  "proxy": "http://gatorwebdev.com:9000"
 }
