@@ -35,9 +35,9 @@ db.once("open", function() {
   console.log("MongoDB connected!\n\n");
 });
 
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname + "/test.html"));
-// });
+app.get("/", (req, res) => {
+  res.send("Gatorwebdev is working.");
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}!`));
 
