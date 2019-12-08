@@ -13,12 +13,10 @@ function App() {
   const [loggedIn, setloggedIn] = useState(false);
 
   function checkLoginStatus() {
-    axios
-      .get("http://gatorwebdev.com:9000/loggedIn", { withCredentials: true })
-      .then((response) => {
-        console.log(response);
-        response.data === "LOGGED_IN" ? setloggedIn(true) : setloggedIn(false);
-      });
+    axios.get("http://localhost:9000/loggedIn", { withCredentials: true }).then((response) => {
+      console.log(response);
+      response.data === "LOGGED_IN" ? setloggedIn(true) : setloggedIn(false);
+    });
   }
 
   checkLoginStatus();

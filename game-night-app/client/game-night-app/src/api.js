@@ -1,5 +1,5 @@
 import openSocket from "socket.io-client";
-const socket = openSocket("http://192.168.1.131:8000");
+const socket = openSocket("http://localhost:8000");
 
 function subscribeToTimer(cb) {
   socket.emit("subscribeToTimer", 1000);
