@@ -7,7 +7,17 @@ import Signup from "./components/Signup";
 import CharacterSheet from "./components/CharacterSheet";
 import Welcome from "./components/Welcome";
 import Dashboard from "./components/Dashboard";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import {
+  faCheckSquare,
+  faCoffee,
+  faEllipsisV,
+  faChevronLeft
+} from "@fortawesome/free-solid-svg-icons";
 import "./App.css";
+
+library.add(fab, faCheckSquare, faCoffee, faEllipsisV, faChevronLeft);
 
 function App() {
   const [loggedIn, setloggedIn] = useState(false);

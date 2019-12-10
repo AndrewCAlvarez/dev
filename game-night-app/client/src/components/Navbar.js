@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Navbar(props) {
   function logout() {
@@ -13,10 +14,13 @@ function Navbar(props) {
   if (props.loggedIn) {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+        <FontAwesomeIcon icon={"chevron-left"} style={{ color: "white" }} />
         <button className="navbar-brand" onClick={props.onNavigate}>
           Game Night
         </button>
-        <button onClick={logout}>Logout</button>
+        <button onClick={logout} style={{ color: "white" }}>
+          Logout
+        </button>
         <button
           className="navbar-toggler"
           type="button"
@@ -33,6 +37,7 @@ function Navbar(props) {
   } else {
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
+        <FontAwesomeIcon icon={"chevron-left"} style={{ color: "white" }} />
         <button className="navbar-brand" onClick={props.onNavigate}>
           Game Night
         </button>

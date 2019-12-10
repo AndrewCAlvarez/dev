@@ -5,6 +5,27 @@ img {
 }
 
 .characterPreview--container {
-  padding: 5px;
-  border-bottom: 1px solid black;
+  height: 8vh;
+  display: flex;
+  border: 1px solid white;
+
+  div {
+    height: 100%;
+    width: 75%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+
+    align-items: center;
+    label {
+      padding: 5px 5px 0 5px;
+    }
+  }
+}
+
+.characterEditOptions {
+  button {
+    width: 100%;
+    height: 50%;
+  }
 }

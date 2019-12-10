@@ -57,4 +57,18 @@ router.post("/playerCharacter", function(req, res) {
   res.sendStatus(200);
 });
 
+router.post("/deletePlayerCharacter", (req, res) => {
+  playerCharacter.findById({ _id: req.body.characterID }, function(err, character) {
+    if (err) console.log(err);
+    console.log(character.name);
+    playerCharacter.findOneAndDelete({ _id: req.body.characterID }, function(
+      err,
+      deletePlayerCharacter
+    ) {
+      if (err) console.log(err);
+    });
+  });
+  res.send("Character deleted.");
+});
+
 module.exports = router;
