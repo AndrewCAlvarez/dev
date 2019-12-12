@@ -1,7 +1,11 @@
 import React from "react";
 import axios from "axios";
+import { signin } from "./../actions";
+import { useDispatch } from "react-redux";
 
-function Signin(props) {
+function Signin() {
+  const dispatch = useDispatch();
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -16,7 +20,7 @@ function Signin(props) {
       )
       .then(function(response) {
         console.log(response);
-        props.handleLogin();
+        dispatch(signin());
       })
       .catch(function(error) {
         console.log(error);

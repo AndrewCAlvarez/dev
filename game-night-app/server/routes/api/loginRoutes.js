@@ -49,7 +49,7 @@ router.post("/signup", (req, res) => {
       newUser.save(function(err) {
         if (err) return console.error(err);
       });
-      res.send(newUser.id); // send user's id
+      res.sendStatus(200); // send user's id
     } else {
       res.sendStatus(401);
     }
