@@ -7,6 +7,7 @@ import Signup from "./components/Signup";
 import CharacterSheet from "./components/CharacterSheet";
 import Welcome from "./components/Welcome";
 import Dashboard from "./components/Dashboard";
+import CharacterSelect from "./components/CharacterSelect";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import {
@@ -15,6 +16,7 @@ import {
   faEllipsisV,
   faChevronLeft
 } from "@fortawesome/free-solid-svg-icons";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 
 library.add(fab, faCheckSquare, faCoffee, faEllipsisV, faChevronLeft);
@@ -33,17 +35,22 @@ function App() {
 
   if (!loggedIn) {
     return (
-      <div>
-        <Navbar loggedIn={loggedIn} handleLogin={checkLoginStatus} />
-        <Welcome handleLogin={checkLoginStatus} />
-      </div>
+      <Router>
+        <div>
+          <Navbar loggedIn={loggedIn} handleLogin={checkLoginStatus} />
+          <Welcome handleLogin={checkLoginStatus} />
+        </div>
+      </Router>
     );
   } else {
     return (
-      <div>
-        <Navbar loggedIn={loggedIn} handleLogin={checkLoginStatus} />
-        <Dashboard />
-      </div>
+      <Router>
+        <div>
+          <Navbar loggedIn={loggedIn} handleLogin={checkLoginStatus} />
+          <Route path="/" component={Dashboard} />
+          <Route path="/createcharacter" component={CreateCharacter} />
+        </div>
+      </Router>
     );
   }
 }

@@ -3,8 +3,7 @@ import axios from "axios";
 import CharacterSelect from "./CharacterSelect";
 import CreateCharacter from "./CreateCharacter";
 import CharacterSheet from "./CharacterSheet";
-import Chat from "./Chat";
-// import { userInfo } from "os";
+import loading from "./loading.gif";
 
 function Dashboard() {
   const [characters, setCharacters] = useState("");
@@ -15,12 +14,15 @@ function Dashboard() {
     axios
       .get("http://localhost:9000/playerCharacter", { withCredentials: true })
       .then((response) => {
-        response.data.length === 0 ? console.log("ZERO") : setCharacters(response.data);
+        //  if length is 0, then there are no characters
+        response.data.length === 0 ? setCharacters("none") : setCharacters(response.data);
       });
   }
 
   function handleCreateCharacter() {
+    console.log("Create character clicked");
     setCreateCharacter(!createCharacter);
+    console.log(createCharacter);
     handleCharacterChange();
   }
 
@@ -30,8 +32,16 @@ function Dashboard() {
     setSelectedCharacter(characters[characterIndex]);
   }
 
-  if (characters === "" || createCharacter === true) {
+  if (characters === "") {
     handleCharacterChange();
+    return <img src={loading} />;
+  } else if (characters === "none" && createCharacter === false) {
+    return (
+      <button className="btn btn-primary" onClick={handleCreateCharacter}>
+        Add New Character
+      </button>
+    );
+  } else if (createCharacter === true) {
     return (
       <div>
         <h3>Character Creation</h3>
@@ -59,7 +69,6 @@ function Dashboard() {
           handleCharacterSelected={handleCharacterSelected}
           characters={characters}
         />
-        {/* <Chat /> */}
       </div>
     );
   }
