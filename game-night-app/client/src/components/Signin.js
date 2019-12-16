@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { signin } from "./../actions";
+import { signin } from "../redux/actions";
 import { useDispatch } from "react-redux";
 
 function Signin() {

@@ -20,7 +20,7 @@ import {
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import { useSelector, useDispatch } from "react-redux";
-import { signin, signout } from "./actions";
+import { signin, signout } from "./redux/actions";
 
 library.add(fab, faCheckSquare, faCoffee, faEllipsisV, faChevronLeft);
 

@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { signin } from "./../actions";
+import { signin } from "../redux/actions";
 
 function Signup(props) {
   const dispatch = useDispatch();

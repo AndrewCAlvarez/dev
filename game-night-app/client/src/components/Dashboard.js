@@ -5,14 +5,9 @@ import CreateCharacter from "./CreateCharacter";
 import CharacterSheet from "./CharacterSheet";
 import loading from "./loading.gif";
 import { useSelector, useDispatch } from "react-redux";
-import { increment, decrement } from "../actions";
+import { increment, decrement } from "../redux/actions";
 
 function Dashboard() {
-  // REDUX STUFF
-  const counter = useSelector((state) => state.counter);
-  const isLogged = useSelector((state) => state.isLogged);
-  const dispatch = useDispatch();
-
   const [characters, setCharacters] = useState("");
   const [createCharacter, setCreateCharacter] = useState(false);
   const [selectedCharacter, setSelectedCharacter] = useState(null);
@@ -76,16 +71,6 @@ function Dashboard() {
           handleCharacterSelected={handleCharacterSelected}
           characters={characters}
         />
-        <div>
-          <div className="btn btn-primary">Counter: {counter}</div>
-          <button className="btn btn-primary" onClick={() => dispatch(increment(5))}>
-            +
-          </button>
-          <button className="btn btn-primary" onClick={() => dispatch(decrement())}>
-            -
-          </button>
-          <div className="btn btn-primary">{isLogged ? <p>Logged in</p> : <p>Logged out</p>}</div>
-        </div>
       </div>
     );
   }
