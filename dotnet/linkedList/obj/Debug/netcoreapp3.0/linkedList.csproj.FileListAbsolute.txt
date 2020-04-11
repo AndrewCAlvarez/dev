@@ -1,0 +1,11 @@
+/Users/andrewalvarez/dev/dotnet/linkedList/bin/Debug/netcoreapp3.0/linkedList
+/Users/andrewalvarez/dev/dotnet/linkedList/bin/Debug/netcoreapp3.0/linkedList.deps.json
+/Users/andrewalvarez/dev/dotnet/linkedList/bin/Debug/netcoreapp3.0/linkedList.runtimeconfig.json
+/Users/andrewalvarez/dev/dotnet/linkedList/bin/Debug/netcoreapp3.0/linkedList.runtimeconfig.dev.json
+/Users/andrewalvarez/dev/dotnet/linkedList/bin/Debug/netcoreapp3.0/linkedList.dll
+/Users/andrewalvarez/dev/dotnet/linkedList/bin/Debug/netcoreapp3.0/linkedList.pdb
+/Users/andrewalvarez/dev/dotnet/linkedList/obj/Debug/netcoreapp3.0/linkedList.csprojAssemblyReference.cache
+/Users/andrewalvarez/dev/dotnet/linkedList/obj/Debug/netcoreapp3.0/linkedList.AssemblyInfoInputs.cache
+/Users/andrewalvarez/dev/dotnet/linkedList/obj/Debug/netcoreapp3.0/linkedList.AssemblyInfo.cs
+/Users/andrewalvarez/dev/dotnet/linkedList/obj/Debug/netcoreapp3.0/linkedList.dll
+/Users/andrewalvarez/dev/dotnet/linkedList/obj/Debug/netcoreapp3.0/linkedList.pdb

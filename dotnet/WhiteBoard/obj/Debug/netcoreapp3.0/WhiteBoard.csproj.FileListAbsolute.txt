@@ -1,0 +1,11 @@
+/Users/andrewalvarez/dev/dotnet/WhiteBoard/bin/Debug/netcoreapp3.0/WhiteBoard
+/Users/andrewalvarez/dev/dotnet/WhiteBoard/bin/Debug/netcoreapp3.0/WhiteBoard.deps.json
+/Users/andrewalvarez/dev/dotnet/WhiteBoard/bin/Debug/netcoreapp3.0/WhiteBoard.runtimeconfig.json
+/Users/andrewalvarez/dev/dotnet/WhiteBoard/bin/Debug/netcoreapp3.0/WhiteBoard.runtimeconfig.dev.json
+/Users/andrewalvarez/dev/dotnet/WhiteBoard/bin/Debug/netcoreapp3.0/WhiteBoard.dll
+/Users/andrewalvarez/dev/dotnet/WhiteBoard/bin/Debug/netcoreapp3.0/WhiteBoard.pdb
+/Users/andrewalvarez/dev/dotnet/WhiteBoard/obj/Debug/netcoreapp3.0/WhiteBoard.csprojAssemblyReference.cache
+/Users/andrewalvarez/dev/dotnet/WhiteBoard/obj/Debug/netcoreapp3.0/WhiteBoard.AssemblyInfoInputs.cache
+/Users/andrewalvarez/dev/dotnet/WhiteBoard/obj/Debug/netcoreapp3.0/WhiteBoard.AssemblyInfo.cs
+/Users/andrewalvarez/dev/dotnet/WhiteBoard/obj/Debug/netcoreapp3.0/WhiteBoard.dll
+/Users/andrewalvarez/dev/dotnet/WhiteBoard/obj/Debug/netcoreapp3.0/WhiteBoard.pdb

@@ -1,54 +1,49 @@
 #include <stdio.h>
-#include <time.h>
 
-
-int binarySearch(int arr[], int l, int r, int searchTerm)
+void rotateByOne(int arr[], int size)
 {
-    int middle;
-    while(l <= r)
+    printf("Function array: ");
+    int temp = arr[0];
+    for(int i = 0; i < size; i++)
     {
-        middle = l + (r - l) / 2;
-        if( arr[middle] == searchTerm)
+        if(i < size - 1)
         {
-        return middle;
+            arr[i] = arr[i + 1]; 
         }
-        if(arr[middle] < searchTerm)
+        else 
         {
-            l = middle + 1; 
+            arr[i] = temp;
         }
-        else
-        {
-            r = middle - 1;
-        }
+        printf("%d", arr[i]);
     }
-    return -1;
+    printf("\n");
 }
 
 int main()
 {
-    // The idea of binary search is that you know the array is sorted.
-    // Therefore, you can split the array in two checking if the middle is 
-    // greater than or less than the search term until you reach the 
-    // correct element.
-
-    // Instantiate an array for us to work on
-    int arrSize = 8976;
-    int arr[arrSize];
-    int searchTerm = 5999;
-
-    for(int i = 0; i < arrSize; i++)
+    int size = 10;
+    int arr[size];
+    printf("Pre-function: ");
+    for(int i = 0; i < size; i++)
     {
-        arr[i] = i +1; 
+        arr[i] = i;
+        printf("%d", arr[i]);
+    }
+    printf("\n");
+    
+
+    rotateByOne(arr, size);
+    rotateByOne(arr, size);
+    rotateByOne(arr, size);
+    rotateByOne(arr, size);
+    rotateByOne(arr, size);
+    rotateByOne(arr, size);
+    
+    
+    printf("After function: ");
+    for(int i = 0; i < size; i++)
+    {
+        printf("%d", arr[i]);
     }
 
-    // Keep track of how long our search takes by getting start/end time
-    clock_t begin = clock();
-    for(int i = 0; i < 100000; i++)
-    {
-        binarySearch(arr, 0, arrSize, searchTerm);
-    }
-    // printf("found %d\n", binarySearch(arr, 0, arrSize, searchTerm));
-    clock_t end = clock();
-    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-    printf("\n\nTIME: %f seconds.", time_spent);
 }
