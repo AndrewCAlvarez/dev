@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+    padding:0;
+    background-color: black;;
+}
+
+#cardContainer {
+    background-color: brown;
+    width: 80vw;
+    height: 70vh;
+    overflow: scroll;
+}
+
+#card {
+    padding: 10px;
+    border: 1px solid black;
+    width: 100px;
+    height: 40px;
+    background-color: white;
+    
+}
