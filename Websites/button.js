@@ -1,6 +1,7 @@
 
 var button = document.getElementById("theButton");
-button.onclick = () => 
+
+function GetInfo ()
 {
     var elm = document.createElement("div");
     elm.id = "card";
@@ -18,5 +19,7 @@ button.onclick = () =>
     
     document.getElementById("cardContainer").appendChild(elm);
 };
+
+button.onclick = GetInfo;
 
 
