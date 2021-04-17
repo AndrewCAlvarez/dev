@@ -1,0 +1,16 @@
+#nav {
+  margin-top: 5vw;
+  background-color: black;
+  height: 100px;
+  color: aliceblue;
+  background-image: url("https://warhammer40000.com/wp-content/themes/gw-warhammer-40k/assets/40k-header.jpg");
+}
+
+#spotlight {
+  background: radial-gradient(#4f838ac9, black);
+  height: 10vw;
+  width: 10vw;
+  opacity: 0.4;
+  border-radius: 100px;
+  position: absolute;
+}
