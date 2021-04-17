@@ -1,21 +1,21 @@
 body {
-    margin: 0;
-    padding:0;
-    background-color: black;;
+  margin: 0;
+  padding: 0;
+  background-color: black;
 }
 
-#cardContainer {
-    background-color: brown;
-    width: 100vw;
-    height: 70vh;
-    overflow: scroll;
+h1,
+h4 {
+  text-align: center;
 }
 
-#card {
-    padding: 10px;
-    border: 1px solid black;
-    width: 100vw;
-    height: auto;
-    background-color: rgba(196, 170, 170, 0.808);
-    
+p {
+  margin: auto;
+  min-width: 250px;
+  max-width: 80%;
+  border: 1px solid black;
+}
+
+main {
+  border: 1px solid black;
 }
