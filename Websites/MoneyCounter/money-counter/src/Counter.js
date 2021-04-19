@@ -1,16 +1,40 @@
+import React from "react";
 
 
+class Counter extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            time:0,
+            hourlyRate: 40.0,
+            moneyEarned: 0,
+        };
+    }
 
+    componentDidMount(){
+        this.TimerID = setInterval(() => this.tick(), 1000);
+    }
 
-function Counter(props){
-    let dollarsPerSecond = (props.state.dollarsPerHour/60) / 60;
-    let output = dollarsPerSecond * props.state.time;
-    return (
-        <div>
-            <h1>Seconds: {props.state.time}</h1>
-            <h1>Money Earned: { output.toPrecision(4) }</h1>
-        </div>
-    );
+    componentWillUnmount(){
+        clearInterval(this.TimerID);
+    }
+
+    tick(){
+        this.setState({
+            time: this.state.time + 1,
+            moneyEarned: ((this.state.hourlyRate/60)/60) * this.state.time,
+        })
+    }
+
+    render(){
+        return (
+            <div>
+                <h1>Seconds: {this.state.time}</h1>
+                <h1>Money Earned: ${this.state.moneyEarned.toFixed(2) }</h1>
+            </div>
+        );
+    }
 }
+
 
 export default Counter
