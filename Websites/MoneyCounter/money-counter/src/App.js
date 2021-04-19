@@ -2,6 +2,9 @@ import logo from './logo.svg';
 import './App.css';
 import Counter from './Counter';
 import Form from './Form';
+import LoginControl from './LoginControl';
+import TodaysDate from './TodaysDate';
+
 
 
 
@@ -12,6 +15,8 @@ function App(props) {
         <img src={logo} className="App-logo" alt="logo" />
       <Counter />
       <Form />
+      <LoginControl />
+      <TodaysDate />
       </header>
     </div>
   );
