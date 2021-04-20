@@ -9,7 +9,8 @@ class Buzzer extends react.Component{
         this.state = {
             timeLimit : 5,
             isButtonPressed : false,
-            IsGameOver : false
+            IsGameOver : false,
+            IsGameWon : false,
         }
         
         this.handleClick = this.handleClick.bind(this);
@@ -50,16 +51,27 @@ class Buzzer extends react.Component{
 
         if(isButtonPressed && timeLimit > 0){
             this.setState({
-                IsGameOver : true
+                IsGameOver : true,
+                IsGameWon : true
             })
         }
-        if(timeLimit == 0){
+        else if(timeLimit == 0){
             this.setState({
-                IsGameOver : true
+                IsGameOver : true,
             })
         }
     }
     
+    // Sets game state to default values.s
+    RestartGame(){
+        this.setState({
+            timeLimit : 5,
+            isButtonPressed : false,
+            IsGameOver : false,
+            IsGameWon : false
+        })
+    }
+
     tick(){
         this.Countdown();
         this.CheckIfGameIsOver();
@@ -70,6 +82,12 @@ class Buzzer extends react.Component{
         this.setState({
             isButtonPressed : !this.state.isButtonPressed
         })
+        if(this.state.isButtonPressed){
+            this.RestartGame();
+        }
+        else if(this.state.timeLimit == 0){
+            this.RestartGame();
+        }
     }
 
     render(){
@@ -77,25 +95,17 @@ class Buzzer extends react.Component{
         let isButtonPressed = this.state.isButtonPressed;
 
 
-        if(isGameOver){
+        if(this.state.IsGameWon){
             return (
                 <div>
                 <h1>Well done! Try again?</h1>
+                <h2>{this.state.timeLimit} seconds left.</h2>
                 <button onClick={this.handleClick}>Play Again</button>
                 <p>------------------------------------</p>
             </div>
             );
         }
-        else if(this.state.timeLimit == 0){
-            return (
-                <div>
-                <h1>Time's up! Try again?</h1>
-                <button onClick={this.handleClick}>Try Again</button>
-                <p>------------------------------------</p>
-            </div>
-            );
-        }
-        else{
+        else if(this.state.timeLimit > 0){
             return (
                 <div>
                     <h1>Press the button before time runs out.</h1>
@@ -103,6 +113,16 @@ class Buzzer extends react.Component{
                     <button onClick={this.handleClick}>Press</button>
                     <p>------------------------------------</p>
                 </div>
+            );
+        }
+        else{
+            return (
+                <div>
+                <h1>Time's up! Try again?</h1>
+                <h2>{this.state.timeLimit} seconds left.</h2>
+                <button onClick={this.handleClick}>Try Again</button>
+                <p>------------------------------------</p>
+            </div>
             );
         }
         
