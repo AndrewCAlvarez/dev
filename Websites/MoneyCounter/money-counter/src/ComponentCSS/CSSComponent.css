@@ -1,0 +1,20 @@
+.CSSComponentTitle {
+  color: black;
+  margin-bottom: 0px;
+}
+
+.CSSComponentText {
+  color: black;
+  padding-bottom: 10px;
+  margin-top: 0px;
+}
+
+.CSSComponentCard {
+  background-color: white;
+  border-radius: 5px;
+  max-width: 20vw;
+  text-align: center;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 20vh;
+}

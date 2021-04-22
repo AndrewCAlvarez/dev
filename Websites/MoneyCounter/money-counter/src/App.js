@@ -6,6 +6,8 @@ import LoginControl from './Components/LoginControl';
 import TodaysDate from './Components/TodaysDate';
 import Clock from './Components/Clock';
 import Buzzer from './Components/Buzzer';
+import CSSComponent from './Components/CSSComponent';
+import './ComponentCSS/CSSComponent.css';
 
 
 
@@ -15,13 +17,11 @@ function App(props) {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-      <Buzzer />
-      <Counter />
-      <Form />
-      <LoginControl />
-      <TodaysDate />
-      <Clock />
       </header>
+      <CSSComponent />
+        <CSSComponent />
+        <CSSComponent />
+        <CSSComponent />
     </div>
   );
 }
