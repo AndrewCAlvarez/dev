@@ -1,0 +1,56 @@
+// Color palette
+$primary-red: #ec454c;
+$background-beige: #f5ebd1;
+$footer-green: #389e97;
+$footer-light-text: #c2e2e0;
+$orange-blob: #f9b258;
+$grey-blob: #b0c0c2;
+$salmon-blob: #ffa188;
+$green-blob: #b7c0af;
+$pink-blob: #fddecf;
+
+// Media query breakpoints
+$breakpoint-sm-device: 600px;
+$breakpoint-tablet: 768px;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  @media only screen and (min-width: $breakpoint-tablet) {
+    padding: 5vh 5vh 0;
+    background-color: $footer-light-text;
+  }
+  @media only screen and (max-width: $breakpoint-sm-device) {
+    padding: 1vh 1vh 0;
+    background-color: $background-beige;
+  }
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.Nav {
+  background-color: $primary-red;
+  height: 10vh;
+}
+
+.BodyContent {
+  background-color: $primary-red;
+  height: 70vh;
+}
+
+.Footer {
+  background-color: $footer-green;
+  height: 15vh;
+
+  .Footer-Content {
+    margin: 0;
+    color: $footer-light-text;
+    font-family: "Open Sans", sans-serif;
+  }
+}
