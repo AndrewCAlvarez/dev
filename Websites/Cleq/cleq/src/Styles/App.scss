@@ -11,6 +11,9 @@ $grey-blob: #b0c0c2;
 $salmon-blob: #ffa188;
 $green-blob: #b7c0af;
 $pink-blob: #fddecf;
+$cleq-black: #150708;
+$cleq-white: #d5cece;
+$grid-red: #de494c;
 
 // Media query breakpoints
 $breakpoint-sm-device: 600px;
@@ -51,4 +54,27 @@ body {
     margin: 0;
     color: $footer-light-text;
   }
+}
+
+.btn {
+  border-radius: 50px;
+}
+
+.btn-primary {
+  background-color: $cleq-black;
+  border-color: $cleq-black;
+}
+
+.btn-outline-dark {
+  background-color: $primary-red;
+  border-color: $cleq-black;
+  color: $cleq-black;
+}
+
+.bi-arrow-up-right {
+  color: $cleq-white;
+}
+
+.navbar {
+  color: $cleq-black;
 }
