@@ -20,8 +20,9 @@ export class Navigation extends React.Component{
                     <a href="#pricing">Pricing</a>
                     <a href="#developers">Developers</a>
                 </div>
+                <div>{/*spacer div for flexbox*/}</div>
                 <div className="nav-item-2">
-                        <a href="#login">Login</a>
+                        <a href="#login">Log in</a>
                         <button variant="outline-dark">Get a demo</button>{' '}
                 </div>
             </div>
