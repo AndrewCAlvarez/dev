@@ -16,13 +16,29 @@ export class Footer extends React.Component{
     
     render(){
         return(
-            <div className="Footer">
-                <div className="Footer-Content">
-                    <h3>The world's top companies use Cleq to turn data into revenue</h3>   
-                    <img src={MashableLogo} style={{ height: this.state.logoHeight, width: this.state.logoWidth }} alt="website logo"/>
-                    <img src={IndeedLogo} style={{ height: this.state.logoHeight, width: this.state.logoWidth }} alt="website logo"/>
-                    <img src={OrangeLogo} style={{ height: this.state.logoHeight, width: this.state.logoWidth }} alt="website logo"/>
-                    <img src={AmazonLogo} style={{ height: this.state.logoHeight, width: this.state.logoWidth }} alt="website logo"/>
+            <div className="Footer Footer-Content container-fluid">
+                <div className="row">
+                    <div className="col-sm"></div>
+                    <div className="col-9">
+                        <p>The <p>world's top companies use Cleq</p> to turn data into revenue</p>   
+                    </div>
+                    <div className="col-sm"></div>
+                </div>
+                <div className="row">
+                    <div className="col-sm"></div>
+                    <div className="col-sm">
+                        <img src={MashableLogo} style={{ height: this.state.logoHeight, width: this.state.logoWidth }} alt="website logo"/>
+                    </div>
+                    <div className="col-sm">
+                        <img src={IndeedLogo} style={{ height: this.state.logoHeight, width: this.state.logoWidth }} alt="website logo"/>
+                    </div>
+                    <div className="col-sm">
+                        <img src={OrangeLogo} style={{ height: this.state.logoHeight, width: this.state.logoWidth }} alt="website logo"/>
+                    </div>
+                    <div className="col-sm">
+                        <img src={AmazonLogo} style={{ height: this.state.logoHeight, width: this.state.logoWidth }} alt="website logo"/>
+                    </div>
+                    <div className="col-sm"></div>
                 </div>
             </div>
         )

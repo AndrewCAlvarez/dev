@@ -1,5 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
 @import "custom";
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 
 // Color palette
 $primary-red: #ec454c;
@@ -25,14 +26,9 @@ $breakpoint-tablet: 768px;
 }
 
 body {
-  @media only screen and (min-width: $breakpoint-tablet) {
-    padding: 5vh 5vh 0;
-    background-color: $background-beige;
-  }
-  @media only screen and (max-width: $breakpoint-sm-device) {
-    padding: 1vh 1vh 0;
-    background-color: $background-beige;
-  }
+  font-family: "Open Sans", sans-serif;
+  padding: 5vh 5vh 0 5vh;
+  background-color: $background-beige;
 }
 
 .App-logo {
@@ -40,19 +36,49 @@ body {
   pointer-events: none;
 }
 
-.BodyContent {
+.body-content {
   background-color: $primary-red;
   height: 70vh;
+  position: relative;
+
+  #body-content__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+
+    h1 {
+      font-weight: 1000;
+      font-size: 5em;
+      color: $cleq-black;
+      line-height: 90%;
+    }
+
+    .btn {
+      width: 100%;
+    }
+  }
+
+  #body-content__grid {
+    position: relative;
+    z-index: 0;
+  }
 }
 
 .Footer {
   background-color: $footer-green;
   height: 15vh;
   text-align: center;
+  padding-top: 1em;
+  color: $footer-light-text;
 
-  .Footer-Content {
-    margin: 0;
+  p {
+    display: inline;
     color: $footer-light-text;
+
+    p {
+      font-weight: 1000;
+      color: white;
+    }
   }
 }
 
@@ -75,6 +101,43 @@ body {
   color: $cleq-white;
 }
 
-.navbar {
-  color: $cleq-black;
+.nav {
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  padding: 2em;
+  background-color: $primary-red;
+
+  a {
+    text-decoration: none;
+    color: $cleq-black;
+  }
+
+  .nav-item-0 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav-item-1 {
+    font-size: 0.9em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: space-between;
+  }
+
+  .nav-item-2 {
+    font-size: 0.9em;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    button {
+      border: 0.12em solid $cleq-black;
+      background-color: $primary-red;
+      border-radius: 1.2em;
+      padding: 0.3em 1.3em;
+      font-weight: 600;
+    }
+  }
 }

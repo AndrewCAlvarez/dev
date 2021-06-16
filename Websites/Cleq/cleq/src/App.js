@@ -13,8 +13,7 @@ function App() {
       </header>
       <Navigation/>
       <BodyContent/>
-      <Footer />
-
+      <Footer/>
     </div>
   );
 }
