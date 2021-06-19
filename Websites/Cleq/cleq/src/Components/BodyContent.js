@@ -14,30 +14,21 @@ export class BodyContent extends React.Component{
 
     render(){
         return(
-            <div className="body-content">
-                <div className="row container-fluid">
-                    <div className="col-sm"></div>
-                    <div className="col-sm">
-                        <div className="row" id="body-content__content">
-                            <h1>PLAY</h1>
-                            <h1>WITH</h1>
-                            <h1>YOUR</h1>
-                            <h1>DATA</h1>
-                        </div>
-                        
-                    </div>
-                    <div className="col-sm"></div>
-                    {/* Grid svg */}
-                    {/* <img id="body-content__grid" src={Grid} style={{ height: this.state.gridHeight, width: this.state.gridWidth }} /> */}
+            <>
+                {/* Grid svg */}
+                {/* <img id="body-content__grid" src={Grid} style={{ height: this.state.gridHeight, width: this.state.gridWidth }} /> */}
+                <div className="body-content">
+                <div></div>
+                <div className="body-content-center">
+                    <h1>PLAY</h1>
+                    <h1>WITH</h1>
+                    <h1>YOUR</h1>
+                    <h1>DATA</h1>
+                    <button href="#">GET A DEMO <ArrowUpRight></ArrowUpRight></button>
                 </div>
-                <div className="row">
-                    <div className="col-sm"></div>
-                    <div className="col-sm">
-                        <Button href="#">GET A DEMO <ArrowUpRight></ArrowUpRight></Button>
-                    </div>
-                    <div className="col-sm"></div>
+                <div></div>
                 </div>
-            </div>
+            </>
         )
     }
 }
