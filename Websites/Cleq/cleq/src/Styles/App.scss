@@ -1,20 +1,8 @@
 @import "~bootstrap/scss/bootstrap";
 @import "custom";
+@import "Body_Content";
+@import "Colors";
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
-
-// Color palette
-$primary-red: #ec454c;
-$background-beige: #f5ebd1;
-$footer-green: #389e97;
-$footer-light-text: #c2e2e0;
-$orange-blob: #f9b258;
-$grey-blob: #b0c0c2;
-$salmon-blob: #ffa188;
-$green-blob: #b7c0af;
-$pink-blob: #fddecf;
-$cleq-black: #150708;
-$cleq-white: #d5cece;
-$grid-red: #de494c;
 
 // Media query breakpoints
 $breakpoint-sm-device: 600px;
@@ -36,46 +24,6 @@ body {
   pointer-events: none;
 }
 
-.body-content {
-  background-color: $primary-red;
-  height: 70vh;
-  display: grid;
-  grid-template-columns: 33% auto 33%;
-  z-index: 1000;
-  background-image: url(../grid.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 80%;
-
-  .body-content-center {
-    text-align: center;
-    margin-top: 5vh;
-
-    button {
-      background-color: $cleq-black;
-      color: $cleq-white;
-      margin-top: 5vh;
-    }
-  }
-
-  h1 {
-    font-weight: 1000;
-    font-size: 5em;
-    color: $cleq-black;
-    line-height: 90%;
-  }
-
-  .btn {
-    width: 100%;
-  }
-
-  #body-content__grid {
-    z-index: 500;
-    position: relative;
-    display: inline;
-  }
-}
-
 .Footer {
   background-color: $footer-green;
   height: 15vh;
@@ -92,11 +40,6 @@ body {
       color: white;
     }
   }
-}
-
-.blob {
-  height: 10em;
-  width: 10em;
 }
 
 .btn {

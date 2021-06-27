@@ -26,24 +26,32 @@ export class BodyContent extends React.Component{
                 {/* Grid svg */}
                 {/* <img id="body-content__grid" src={Grid} style={{ height: this.state.gridHeight, width: this.state.gridWidth }} /> */}
                 <div className="body-content">
-                <div>
+                <div className="blob0">
                     <img class="blob" src={EqualsBlob} />
-                    <img class="blob" src={BlackBlob} />
+                </div>
+                <div className="blob1">
+                    <img class="blob black-blob" src={BlackBlob} />
+                </div>
+                <div className="blob2">
                     <img class="blob" src={DeltaBlob} />
                 </div>
-                <div className="body-content-center">
-                    <h1>PLAY</h1>
-                    <h1>WITH</h1>
-                    <h1>YOUR</h1>
-                    <h1>DATA</h1>
-                    <button href="#">GET A DEMO <ArrowUpRight></ArrowUpRight></button>
-                </div>
-                <div>
-                    <img class="blob" src={BlackBlob} />
-                    <img class="blob" src={IntegralBlob} />
-                    <img class="blob" src={SigmaBlob} />
-                    <img class="blob" src={InfinityBlob} />
-                </div>
+                    <div className="body-content-center">
+                        <h1>PLAY</h1>
+                        <h1>WITH</h1>
+                        <h1>YOUR</h1>
+                        <h1>DATA</h1>
+                        <button href="#">GET A DEMO <ArrowUpRight></ArrowUpRight></button>
+                    </div>
+                    <div className="blob3 blob4">
+                        <img class="blob black-blob" src={BlackBlob} />
+                        <img class="blob" src={IntegralBlob} />
+                    </div>
+                    <div className="blob5">
+                        <img class="blob" src={SigmaBlob} />
+                    </div>
+                    <div className="blob6">
+                        <img class="blob" src={InfinityBlob} />
+                    </div>
                 </div>
             </>
         )
