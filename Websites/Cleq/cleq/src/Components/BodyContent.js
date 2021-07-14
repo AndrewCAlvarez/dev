@@ -40,10 +40,10 @@ export class BodyContent extends React.Component{
                         <h1>WITH</h1>
                         <h1>YOUR</h1>
                         <h1>DATA</h1>
-                        <button href="#">GET A DEMO <ArrowUpRight></ArrowUpRight></button>
+                        <button id="body-content__button" href="#">GET A DEMO <ArrowUpRight></ArrowUpRight></button>
                     </div>
                     <div className="blob3 blob4">
-                        <img class="blob black-blob" src={BlackBlob} />
+                        <img class="blob black-blob black-blob-right" src={BlackBlob} />
                         <img class="blob" src={IntegralBlob} />
                     </div>
                     <div className="blob5">

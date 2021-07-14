@@ -16,29 +16,18 @@ export class Footer extends React.Component{
     
     render(){
         return(
-            <div className="Footer Footer-Content container-fluid">
-                <div className="row">
-                    <div className="col-sm"></div>
-                    <div className="col-9">
-                        <p>The <p>world's top companies use Cleq</p> to turn data into revenue</p>   
-                    </div>
-                    <div className="col-sm"></div>
+            <div className="Footer Footer-Content">
+                <div id="footer-text">
+                    <p>The <p>world's top companies use Cleq</p> to turn data into revenue</p>   
                 </div>
-                <div className="row">
-                    <div className="col-sm"></div>
-                    <div className="col-sm">
-                        <img src={MashableLogo} style={{ height: this.state.logoHeight, width: this.state.logoWidth }} alt="website logo"/>
-                    </div>
-                    <div className="col-sm">
-                        <img src={IndeedLogo} style={{ height: this.state.logoHeight, width: this.state.logoWidth }} alt="website logo"/>
-                    </div>
-                    <div className="col-sm">
-                        <img src={OrangeLogo} style={{ height: this.state.logoHeight, width: this.state.logoWidth }} alt="website logo"/>
-                    </div>
-                    <div className="col-sm">
-                        <img src={AmazonLogo} style={{ height: this.state.logoHeight, width: this.state.logoWidth }} alt="website logo"/>
-                    </div>
-                    <div className="col-sm"></div>
+                <div id="footer-logos">
+                    <img src={MashableLogo} style={{ height: this.state.logoHeight, width: this.state.logoWidth }} alt="website logo"/>
+
+                    <img src={IndeedLogo} style={{ height: this.state.logoHeight, width: this.state.logoWidth }} alt="website logo"/>
+
+                    <img src={OrangeLogo} style={{ height: this.state.logoHeight, width: this.state.logoWidth }} alt="website logo"/>
+
+                    <img src={AmazonLogo} style={{ height: this.state.logoHeight, width: this.state.logoWidth }} alt="website logo"/>
                 </div>
             </div>
         )

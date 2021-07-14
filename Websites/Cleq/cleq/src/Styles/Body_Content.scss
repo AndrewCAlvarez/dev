@@ -2,7 +2,7 @@
 
 .body-content {
   background-color: $primary-red;
-  height: 70vh;
+  height: 65vh;
   display: grid;
   grid-template-columns: 33% auto 33%;
   grid-template-rows: 40% 20% 40%;
@@ -89,6 +89,7 @@
   grid-column: 3/4;
   grid-row: 1;
   align-items: flex-end;
+  justify-content: space-around;
 }
 .blob5 {
   grid-column: 3/4;
@@ -98,4 +99,15 @@
   grid-column: 3/4;
   grid-row: 3/4;
   justify-content: center;
+}
+
+.black-blob-right {
+  align-self: center;
+}
+
+#body-content__button {
+  font-size: 0.75em;
+  width: 70%;
+  border-radius: 2em;
+  padding: 1.1em 1em 1.1em;
 }
