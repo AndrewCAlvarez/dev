@@ -1,0 +1,7 @@
+#navbar {
+  width: 100vw;
+  height: 10vh;
+  background-color: rebeccapurple;
+  position: fixed;
+  z-index: 5;
+}

@@ -1,0 +1,12 @@
+.flex-container {
+  display: flex;
+  border: solid black 5px;
+  flex-direction: row;
+  margin: 10vw 10vh 10vw 10vh;
+}
+
+.flex-item {
+  border: solid dodgerblue 2px;
+  margin: 5px;
+  padding: 2px;
+}
